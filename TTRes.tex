@@ -48,6 +48,27 @@
 \newcommand{\setopsop}[3]{{#2} \, {#1}\, {#3}}
 \newcommand{\forallop}[3]{\forall {#2}\in {#1}.\, {#3}}
 \newcommand{\includesop}[2]{{#2}\in {#1}}
+\newcommand{\txa}[1]{
+\begin{center}
+\fbox{
+\begin{minipage}{4.5in}
+{\bf Thorsten's comment:} {\rm #1}
+\end{minipage}
+}
+\end{center}
+}
+
+
+
+ \newcommand{\br}[1]{
+\begin{center}
+\fbox{ 
+\begin{minipage}{4.5in}
+{\bf Bernhard's comment:} {\rm #1}
+\end{minipage}
+}
+ \end{center}
+}
 
  
 \title{Presheaf Type Theory for  monotone Resources\\ \emph{---~Case
@@ -67,6 +88,7 @@ University of Nottingham\qquad University of Sussex}
 \maketitle
 
 \section*{Previous Research Track Record}
+\br{Need to polish track record. txa longer, br shorter.}
 
 \subsection*{Thorsten Altenkirch}
 \sloppy Thorsten Altenkirch is a Reader at the University of
@@ -132,14 +154,10 @@ The two PIs have  collaborated once before in the area of type theory, developin
   At the time they also  co-organised and co-chaired   the TYPES workshop in  Kloster Irsee near Munich.
 
 
-%
-  \section*{References}
-
  \newpage
  
 \section*{Proposed Research}
-up to 6 pages
-
+ 
 \subsection*{Summary}
 \label{sec:summary}
 
@@ -147,6 +165,8 @@ Dependently typed programming languages like Agda exploit a powerful type system
 
 
 \subsection*{Introduction and Overview}
+
+\br{integrate and eliminate}
  Functional programming is  referentially transparent as side effects are prohibited or strictly controlled by a type system.  Modern  languages like Haskell,  Python, F\# and  object-oriented variants like OCaml and Scala  have massively contributed to the popularity of functional programming (citations needed). These languages are frequently used outside academia  (citation/examples needed, need some real life data).  (Patterns of functional Map-reduce???).
  
  One main feature of these languages is their strong type system which allows the programmer to  discover certain errors at compile time. If   the type system is rich enough such that it comprises dependent types, i.e. types that depend on program expressions, it can be used to encode program  properties (propositions-as-types). This gives rise to what is called \emph{Type theory}: a functional language  with a   type system strong enough  to express  (second-order) predicate logic. As a consequence, the verification of program properties can be done by the type checker which undoubtedly is of  huge benefit to program developers. Of course the programs will now also contain proof terms that the programmer, now also a verifier, needs to provide.
@@ -362,6 +382,7 @@ Further international leaders in the field  are G.~Morrisett (Harvard) and S.~We
  %http://news.cnet.com/8301-13846_3-9978812-62.html).
  
  \subsection*{Academic Impact}
+ \txa{ToDo}
  
 \emph{ Describe how the research will benefit other researchers in the field and in related disciplines, both within the UK and elsewhere.}
 
@@ -374,7 +395,10 @@ Explain any collaboration with other researchers and their role in the project.}
 
 visiting researchers?  Who shall we nominate?
 
-Wouter Swierstra, Greg Morrissett?   Thomas Streicher, Jeremy Gibbons?
+Wouter Swierstra
+Greg Morrissett
+Thomas Streicher 
+ Jeremy Gibbons
 
 We should then say which work packages they will contribute for. Project partners should send letter of support as far as I understand.
 
@@ -407,6 +431,7 @@ Objectives
 \item Investigate other applications of ``presheaf type theory.''
 \end{itemize}
 
+\br{Refine and add timeline info and novelty info.}
 
 \subsection*{Programme and Methodology}
 
@@ -431,40 +456,50 @@ syntax.
 
 
 
-
+\txa{Milestones, more detail, how measure success? Management (meetings)?}
  
 
 We detail the work packages. Before we need to point out that we use the local state monad as guiding example, that we use presheaf semantics as we know it can deal with such monotone resource already. 
 
+ \begin{enumerate}
+ \item Define a presheaf semantics for DTP. (Nottingham/Sussex)
+ \item Model local state resources using the presheaf semantics (from above). (Nottingham/Sussex)
+ \item Examples using local state (see HTT, queues). (Nottingham/Sussex).
+ \item Develop \emph{Presheaf Type Theory}. (Nottingham/Sussex)
+ \item Implement \emph{Presheaf Type Theory}.(Nottingham)
+  \item Investigate combination of various resources and resource models. (Nottingham)
+ \item More examples using other monotone resources (thread, transaction based memory (STM)). (Sussex)
+ \item Investigate other application of presheaf type theory like HOAS. (Nottingham)
+ \item Establish reasoning principles for monotone resources (Separation/Hoare Logic, see HTT) (Sussex)
+ \item Effective tool support for using the above reasoning principles. (Sussex)
+ \end{enumerate}
  
+\subsection*{References}
+
+\txa{add}
+\br{add}
+
+
  \newpage
  
  \section*{Work Plan}
-one page, they like GANTT or PERT charts.
-
-All work packages are do be formally developed in/with Agda (``theory'' and tool support)
+All work packages are do be formally developed in/with Agda (``theory'' and tool support).
 
  \begin{enumerate}
- \item Define a presheaf semantics for core Type Theory.
- \item Model the monotone resources in the above.
- \item Examples using local state (see HTT, queues).
- \item Develop generic interface for Type Theory with monotone resources by reflection of semantics 
- \item Investigate combination of various resources and resource models.
- \item More examples using other monotone resources (thread, transaction based memory (STM)).
- \item Investigate other application of presheaf type theory like HOAS.
- \item Establish reasoning principles for monotone resources (Separation/Hoare Logic, see HTT)
- \item Effective tool support for using the above reasoning principles.
+ \item Define a presheaf semantics for DTP. (Nottingham/Sussex)
+ \item Model local state resources using the presheaf semantics (from above). (Nottingham/Sussex)
+ \item Examples using local state (see HTT, queues). (Nottingham/Sussex).
+ \item Develop \emph{Presheaf Type Theory}. (Nottingham/Sussex)
+ \item Implement \emph{Presheaf Type Theory}.(Nottingham)
+  \item Investigate combination of various resources and resource models. (Nottingham)
+ \item More examples using other monotone resources (thread, transaction based memory (STM)). (Sussex)
+ \item Investigate other application of presheaf type theory like HOAS. (Nottingham)
+ \item Establish reasoning principles for monotone resources (Separation/Hoare Logic, see HTT) (Sussex)
+ \item Effective tool support for using the above reasoning principles. (Sussex)
  \end{enumerate}
- 
-\subsection*{Task list}
 
-\begin{enumerate}
- \item 
- \item 
- \item 
- \end{enumerate}
- 
-
+\br{chartification, match with milestones}
+\br{overview who does what}
 \newpage
 \section{Justification of Resources}
 
