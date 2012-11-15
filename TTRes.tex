@@ -183,7 +183,7 @@ However, in this approach  dependency on resources needs to be modelled explicit
  and (b) there already exist standard categorical models for (dependent) type theory where the category of types can be suitable instantiated by pre sheaf categories.
 Categorical semantics delivers for free  a rich toolbox of concepts and theorems for  our models.  
  
-In a dependent type they with monotone resources  reasoning about functional programs with resources (side effects) will be possible keeping all the useful and well-loved advantages of type theory (which are?). An additional benefit is that the development of such an extension via a ``presheaf application" can be regarded and maybe established as methodology for potentially other extensions of type theory. 
+In a dependent type theory with monotone resources  reasoning about functional programs with resources (side effects) will be possible keeping all the useful and well-loved advantages of type theory (which are?). An additional benefit is that the development of such an extension via a ``presheaf application" can be regarded and maybe established as methodology for potentially other extensions of type theory. 
  
  \subsection*{Background}
  
@@ -389,7 +389,7 @@ Wouter Swierstra, Greg Morrissett?   Thomas Streicher, Jeremy Gibbons?
 
 We should then say which work packages they will contribute for. Project partners should send letter of support as far as I understand.
 
-Wed on;t have any industrial partners/visitors. is that a problem?
+We don't have any industrial partners/visitors. is that a problem?
 
  \subsection*{Research Hypothesis and Objectives}
  While it is clear in principle that any dependently typed program can be given a presheaf semantics and that with this interpretation monotone resources can be given a functional specification, it is not yet clear how to use this idea in practice. What does it mean to interpret a given program or proof  in a presehaf semantics? How can objects in this presheaf workd interact with ordinary objects? And how can we combine different notion of monotone effects which lead to different presehaf interpretations in one program?
@@ -398,23 +398,54 @@ Wed on;t have any industrial partners/visitors. is that a problem?
 Explain why the proposed project is of sufficient timeliness and novelty to warrant consideration for funding.
 Identify the overall aims of the project and the individual measurable objectives against which you would wish the outcome of the work to be assessed.}
 
+Our hypothesis is that we can develop a purely functional
+specification of monotone resources in functional programming
+exploiting the presheaf semantics of Type Theory. This extends the
+scope of dependently typed programming and makes it feasible to
+develop real world applications relying on monotone resources.
 
-Our hypothesis: we can safely embed monotone resources in type theory and this leads to   elegant programs that make side effects amenable to the functional programmer.
+% Our hypothesis: we can safely embed monotone resources in type theory and this leads to   elegant programs that make side effects amenable to the functional programmer.
 
 Objectives
 \begin{itemize}
-\item develop the syntactic language for the extension of dependent type theory with resources
-\item develop the pre sheaf models for soundness
-\item implement (what?) in Agda
-\item prove the usability doing examples like local state (and what else?)
+\item Show that the presehaf semantics of Type Theory can be used to
+  model monotone resources,
+\item Define a syntactic extension of Type Theory which makes it
+  possble to interpret type theoretic programs wrt to different presheaves,
+\item Implement this extension as an extension to the Agda system,
+\item Study different applications of presheaf type theory to
+  monotone resources and show their usability.
+\item Investigate other applications of presheaf type theory.
 \end{itemize}
-  \subsection*{Programme and Methodology}
+
+
+\subsection*{Programme and Methodology}
 
  \emph{Detail the methodology to be used in pursuit of the research and justify this choice.
 Describe the programme of work, indicating the research to be undertaken and the milestones that can be used to measure its progress. The detail should be sufficient to indicate the programme of work for each member of the research team. Explain how the project will be managed.}
+
+We will be using dependently typed programming not just as the
+objectve but also as the vehicle carrying out the research. That is we
+will develop our programs and theorems using the Agda system.
+We will be using local state as our guiding example and first study 
+how to use presheaf semantics to program and reason about this
+particular resource. We will be using the experiences gained here to
+develop a generic interface for presheaf interpretations of Type
+Theory and will implement an extension to Agda facilitating this
+approach. We will the study other examples of monotone resources
+such as threads and transaction based memory. In particular we plan to
+develop some interesting certified programs using monotone resources
+in this approach (examples ?). We will also study other potential
+application of presheaf Type Theory such as higher order abstract
+syntax. 
+
+
+
+
+
  
 
-We detail the work packages. Before we need to point out that we use the local state monad as guiding example, that we use pre sheaf semantics as we know it can deal with such monotone resource already. 
+We detail the work packages. Before we need to point out that we use the local state monad as guiding example, that we use presheaf semantics as we know it can deal with such monotone resource already. 
 \spacing{0.85}
  \bibliographystyle{alpha}
  
@@ -427,9 +458,11 @@ one page, they like GANTT or PERT charts.
  \item Define Presheaf semantics for core Type Theory
  \item Model the monotone resources in the above
  \item Agda implementation
- \item Examples (like IORef)
+ \item Examples using local state
  \item Develop generic interface for Type Theory with monotone resources by reflection of semantics 
  \item Investigate combination of various resources and resource models
+ \item More examples using other monotone resources.
+ \item Investigate other application of presheaf type theory
  \end{enumerate}
  
 \subsection*{Task list}
