@@ -1,0 +1,953 @@
+\documentclass[a4paper]{article}
+
+\input{prelude.tex}
+
+\title{Reusability and Dependent Types: Case for Support}
+\author{Thorsten Altenkirch, Neil Ghani, Jeremy Gibbons, Conor McBride, Peter
+Morris}
+\date{}
+
+\begin{document}
+
+
+\twocolumn[\maketitle
+\section*{Summary}
+
+Robin Milner coined
+the slogan \emph{well typed programs cannot go
+  wrong}, advertising the power of types in functional languages like
+ML and Haskell to catch runtime errors. Nowadays, we
+can and should go further: \emph{dependently typed programming}
+exploits the power of very expressive type systems to deliver stronger
+guarantees but also additional support for software development,
+using types to guide the development process. This is witnessed by a
+recent surge of language proposals with the goal 
+to harness
+the power of
+dependent 
+types, e.g.
+Haskell with GADTs~\cite{haskell,gadt}, 
+Agda~\cite{agdawiki},
+Coq~\cite{coq}, 
+$\Omega$mega~\cite{omega}, 
+Concoqtion~\cite{concoqtion1}, 
+Guru~\cite{guru}, 
+Ynot~\cite{ynot}, 
+Epigram~\cite{epigram2}, 
+and so on.
+
+However, expressive type systems have their price: more specific types
+frequently reduce the reusability of code, whose too-specific
+implementation type may not fit its current application.
+This phenomenon
+already shows up in the traditional Hindley-Milner style type system of
+ML and Haskell;
+it becomes even more prevalent in a dependently typed
+setting. Luckily, all is not lost: dependent types are expressive
+enough that they can talk about themselves reflectively, making
+\emph{meta-programming} one of their potential killer applications
+\cite{lennart:dtp08},
+with the potential to combine
+expressive types
+and
+reusable software components.
+
+Based on and inspired by recent research at Nottingham on dependently
+typed programming (EPSRC EP/C512022/1) and container types (EPSRC
+EP/C511964/2) and at Oxford on datatype-generic programming (EPSRC
+GR/S27078/01, EP/E02128X/1) we plan to explore the potential of
+dependent types to deliver reusable and reliable software components. To achieve
+this, we intend to explore two alternative roads ---~reusability by structure
+and reusability by design~--- and express both within a dependently typed
+framework. Our programme is to build new tools extending the Epigram\,2
+framework, investigate the underlying theory using container
+types, and most importantly establish novel programming patterns
+and libraries.
+%ctm adds
+We seek funding for an RA at Nottingham (Peter Morris,
+whose PhD laid much of the groundwork for this proposal), and two doctoral
+students (one each at Oxford and Strathclyde), together with appropriate
+support for equipment, coordination, travel, and dissimination (i.e. a workshop and a summer school)
+\vspace{2ex}]
+
+\section*{Part 1: Track Record}
+
+\subsection*{Thorsten Altenkirch}
+
+\sloppy Thorsten Altenkirch is a Reader at the University of
+Nottingham and co-chair (with Graham Hutton) of the Functional
+Programming Laboratory. His main research interests are Type Theory,
+Functional Programming, Categorical Methods and Quantum Computing and
+he has published extensively in these areas. He has been Principal
+Investigator on two EPSRC projects, including \textit{Observational
+  Equality For Dependently Typed Programming} (EPSRC grant
+EP/C512022/1), and co-investigator on two more.  He has participated
+in a number of EU projects, in particular in the Coordination Action
+TYPES and its predecessors. He organized the annual TYPES meeting
+in 2007 and specialized workshops on Dependently Typed Programming, in
+2004 (Dagstuhl seminar 04381) and in 2008 in Nottingham. He
+recently served as a member on the PCs of CiE 2008 and TLCA 2006 and
+is cochairing the PC of PLPV 2009. In 2007 he spent one month as a
+visiting Professor  at the
+Universit\'{e} Denis Diderot in Paris.
+
+Especially relevant for
+this % ctm -- the present
+proposal is
+%ctm -- the joint
+work with Abbott,
+McBride and Ghani on 
+Container Theory~\cite{alti:fossacs03,alti:tlca03,alti:icalp04,alti:jpartial,alti:mpc04,alti:cont-tcs}
+and with Ghani, McBride and Morris on generic programming with
+dependent types~\cite{alti:wcgp02,alti:regular,txa:ssgp06,alti:cats07,alti:jcats07}.
+
+
+\subsection*{Neil Ghani}
+
+Neil Ghani is a recently appointed Professor at the University of
+Strathclyde and leader of the newly established Mathematically
+Structured Programming Group. Previously, he was a Reader at the
+University of Nottingham and a member of its Functional Programming
+Laboratory. He has published extensively in the areas of
+Category Theory, Functional Programming and Type Theory and has been
+the Principal Investigator of four EPSRC grants. His research focusses
+on the problem of defining high level programming abstractions that
+allow software to be written in a clean, concise and cogent
+manner. He has worked in the areas of $\lambda$-calculus, rewriting,
+artificial intelligence, category theory, type theory and functional
+programming. Among other academic commitments he has been
+the Director of the Midlands Graduate School for Theoretical Computer
+Science from 2003--2006 and recently he has been serving on the
+programme committees for CMCS, RTA and PPDP.
+
+Of direct relevance to this project is his development of the theory
+of containers to provide a unified framework for defining concrete
+data structures~\cite{alti:fossacs03,alti:tlca03,alti:icalp04,alti:jpartial,alti:mpc04,alti:cont-tcs}
+and the type-independent generic functions between them~\cite{alti:cats07,alti:jcats07}.  He has both developed their
+theoretical foundations and demonstrated how they can be applied
+to programming problems, such as stream processing.
+
+\subsection*{Jeremy Gibbons}
+
+Jeremy Gibbons is Reader in Software Engineering at the University of
+Oxford. Among other roles, he has been secretary of IFIP Working Group
+2.1 on Algorithmic Languages and Calculi for over a decade.  His
+research interests are in programming methodology, specifically in
+precise yet concise formalisms for presenting and reasoning about
+programs; he has around 50 peer-reviewed publications in this area.
+
+He has particular interests in generic programming, and in the
+relationship between the functional and object-oriented paradigms. He
+has been Principal Investigator on two relevant EPSRC grants:
+\textit{Datatype-Generic Programming} (GR/S27078/01), investigating
+the parametrisation of programs by datatypes, rated as outstanding,
+and (EP/E02128X), investigating lightweight approaches to dependently
+typed programming.
+
+{\looseness=-1 Relevant recent publications concern datatype-generic
+  programming
+  \cite{Gibbons2005:DesignECOOP,Gibbons2005:DesignOOPSLA,Gibbons2006:Design,Gibbons2007:Datatype},
+  design patterns in functional programming
+  \cite{Gibbons&Oliveira2008:Essence,Gibbons2006:Fission,Gibbons2005:Metamorphisms,Gibbons2003:Origami},
+  corecursion
+  \cite{Gibbons2008:Unfolding,Gibbons*2006:Enumerating,Gibbons2006:Spigot,Gibbons&Hutton2005:Proof,Bird&Gibbons2003:Arithmetic,Hutton&Gibbons00:Generic,Gibbons*2001:When},
+  generic programming
+  \cite{Gibbons*2007:Generic,Gibbons2003:Patterns,Gibbons2000:Generic},
+  reasoning in the face of undefinedness \cite{Danielsson*2006:Fast},
+  and nested datatypes
+  \cite{Bird*99:Program,Martin&Gibbons2001:Semantics,Martin*2004:Disciplined}.
+  In the last few years he has jointly edited \textit{The Fun of
+    Programming} \cite{Gibbons&deMoor2003:Fun}, lecture notes from
+  three summer schools
+  \cite{Backhouse*2007:Datatype,Backhouse&Gibbons2003:Summer,Backhouse*2002:Algebraic},
+  and the proceedings of two international conferences
+  \cite{Davies&Gibbons2007:Integrated,Gibbons&Jeuring2003:Generic}.
+  He has recently served on the programme committees of MPC, ICFP,
+  UTP, Haskell Symposium, IFM, BCTCS, TFP; he is on the Steering
+  Committee for WGP, and General Chair of the Working Conference on
+  Domain-Specific Languages. He is also a Co-Investigator on the
+  \pounds 2.4m MRC-funded \textit{CancerGrid} project, developing
+  software infrastructure for cancer clinical trials, and a follow-on
+  project on \textit{Information-Driven Health}.
+\par}
+
+\subsection*{Conor McBride}
+Conor McBride is a recently appointed Lecturer at the University of
+Strathclyde. He gained a PhD under Burstall in Edinburgh, and has held
+research positions under Luo and McKinna at Durham (EPSRC grant
+GR/N72259, \emph{Epigram: Innovative Programming via Inductive
+  Families}), and Altenkirch at Nottingham (EPSRC grant EP/C512022/1,
+\emph{Observational Equality For Dependently Typed Programming}). He
+has also worked in industry on functional programming.  His
+publications range from foundational
+issues~\cite{alti:jpartial,alti:mpc04,alti:tlca03,%
+  DBLP:conf/birthday/GoguenMM06} through to programming
+techniques~\cite{conor.james:notanumber,%
+  conor.ross:applicative.functors,conor:faking,
+  DBLP:conf/popl/McBride08}, but are centred on dependently typed
+programming~\cite{conor.james:viewfromleft,
+  conor:unification,conor:afp-notes,alti:wcgp02,
+  alti:regular}. Through Epigram, he has built an international
+reputation for outstanding, pioneering research in this exciting new
+field. He coordinates the design and implementation of Epigram 2, the
+main delivery vehicle for this proposal's research.
+
+McBride is co-founder (with Gibbons and Hutton) of the seminar series
+\emph{Fun in the Afternoon} and (with Uustalu) of the workshop on
+\emph{Mathematically Structured Functional Programming}.  He is a
+member of the PLPV Steering Committe, and also served on the PCs of
+Haskell Workshop 2006, PLPV 2007, and WGP 2008.
+
+
+\subsection*{Peter Morris}
+
+Peter Morris will be the researcher working full-time on the project.
+He has recently and successfully defended his PhD thesis, \emph{Constructing
+Universes for Generic Programming with Dependent Types}~\cite{morris:PhD},
+under Thorsten Altenkirch. His work focuses on novel approaches to datatypes
+in dependently typed programming ---~specifically, in Epigram~--- which are
+directly equipped with a notion of generic programming, \emph{ab initio}.  
+An excellent young researcher and a 
+key member of the Epigram team, he works on
+many aspects of its design and implementation~\cite{epigram2}. Epigram's new
+treatment of datatypes is largely based on his work.  Morris has presented
+his work at the annual TYPES meetings in Nottingham, 2006 and Udine, 2007, as
+well as BCTCS in 2005 and 2006 and at Computing -- The Australian Theory
+Symposium in 2007~\cite{alti:cats07}.  His paper, \emph{Exploring the Regular
+Tree Types}, appeared in the proceedings of TYPES 2004~\cite{alti:regular}. A
+journal version of the CATS paper, \emph{A Universe of Strictly Positive
+Families} is to appear in a special edition of IJFCS~\cite{alti:jcats07}.
+Lecture notes for a course on generic programming in Epigram, based on his
+work appeared in the summer school on Datatype Generic
+Programming~\cite{txa:ssgp06}.
+
+\subsection*{Functional Programming Laboratory,\\ University of Nottingham}
+
+The School of Computer Science at the University of Nottingham has
+recently founded the \emph{Functional Programming Laboratory}
+acknowledging the growing strength of Nottingham in the broad area of
+functional programming. The laboratory comprises Thorsten
+Altenkirch, Graham Hutton and Henrik Nilsson as academic members of
+staff, and currently 3 research assistants and 10 PhD students.
+The School is currently advertising a new lectureship associated to
+the laboratory. The laboratory provides a highly stimulating research
+environment for researchers and PhD students, publicly visible on the
+frequently cited \emph{FP Lunch blog}~\cite{fplunchweb} giving a
+lively picture of ongoing research at Nottingham.
+
+\subsection*{Oxford University Computing Laboratory}
+
+Oxford University Computing Laboratory has an international reputation
+for both research and teaching, and is well known for pursuing
+Christopher Strachey's vision of a productive interaction between
+theory and practice.  The laboratory has a number of other members
+with interests related to this proposal: the \textit{Algebra of
+  Programming} group, with Richard Bird and Ralf Hinze (as well as
+Gibbons); the \textit{Programming Tools Group} with Oege de Moor; and
+the \textit{Centre for Metacomputation} with de Moor, Samson Abramsky,
+Luke Ong, and Tom Melham. It therefore provides an enriching
+environment for doctoral research on the project.
+
+\subsection*{Mathematically Structured Programming Group, University of Strathclyde}
+\label{sec:funct-progr-group}
+
+The \emph{Mathematically Structured Programming} group was founded in
+July 2008 by three researchers of international standing: Neil Ghani,
+Patricia Johann, and Conor McBride. It aims to further the mutual
+support between the mathematics of computational structure and the
+design of programs and languages. Recently arrived from Nottingham,
+Ghani and McBride continue their long and fruitful collaboration with
+Altenkirch and Morris, relating especially to container theory and
+dependently typed programming. A doctoral student on this project
+would receive expert supervision, and join a vital new group --- part
+of a vibrant Scottish research community --- at an exciting time.
+
+
+\cleardoublepage
+
+\appendix
+
+\section*{Part 2: Proposed Research}
+
+\section{Background}
+
+\subsection*{Functional Programming}
+\label{sec:funct-progr}
+
+The \textbf{Functional Programming} paradigm~\cite{backus:fp} presents
+computation as the evaluation of mathematical \emph{expressions} built
+by the application of functions, rather than the execution of
+\emph{commands} which change the state of a machine. Functional
+languages thus abstract away from operational details, allowing
+programs to exhibit much more clearly their conceptual
+structure. Modern functional languages like Haskell~\cite{haskell} and
+OCaml~\cite{ocaml} possess very powerful mechanisms for abstraction
+and re-use, facilitating brevity, clarity, reliability and
+productivity. At the same time, they possess production-quality
+compilers, most notably the Glasgow Haskell Compiler (GHC) and the
+Objective Caml system, with substantial libraries capable of
+sustaining a growing programmer base in practical application
+development. As computer systems become more complex and distributed,
+functional programming's %jg -- Functional Programming's
+clarity and hygiene become ever more significant virtues, one of the
+reasons why the designers of mainstream languages such as Java, C\#{}
+and Visual Basic are increasingly adopting ideas from the functional
+world, e.g. polymorphism to support the safe reuse of parametric
+software components.  
+
+Over the years, the r\^ole of \emph{types} in functional programming has
+become increasingly significant. In the landmark Hindley-Milner system, types
+are fully inferred by machine~\cite{damas.milner:principal} and they in no
+way determine the operational behaviour of programs---the assignment of a
+type merely confirms that a program will not `go wrong' in an especially
+disorderly manner. More recently, languages like Haskell have supported type
+systems which drop full mechanical type inference, allowing
+explicit types to express more subtle design statements than a machine
+could determine for itself. Moreover, type-directed programming
+approaches \cite{wadler.blott:less.ad.hoc,weirich:type-cast} depend
+crucially on type information to determine what programs mean.
+
+\subsection*{Dependent Types}
+\label{sec:depend-typed-progr}
+
+\textbf{Dependent types} are types which refer to (hence depend on)
+data. A typical example is the type of vectors: we write
+$\mathrm{Vec}\,A\,n$ for the type of length $n$ sequences of type $A$
+items. Vectors refine the ubiquitous types of lists $[A]$.
+Conventionally, a program $\mathrm{idM}$ computing the identity
+matrix, represented as a sequence of sequences of real numbers, of a
+given finite dimension would have the type $\mathrm{idM} : \Bbb{N} \to
+[[\Bbb{R}]]$. In a dependently typed language the same program could
+be given the more informative type $\mathrm{idM} : (n:\Bbb{N}) \to
+\mathrm{Vec}\,(\mathrm{Vec}\,\Bbb{R}\,n)\,n$, clearly indicating the
+relationship between the value of the input and the structure of the
+output; and documenting the fact that $\mathrm{idM}$ always returns
+square matrices.
+
+Dependent types have their origin in the constructive
+foundations of mathematics \cite{martinloef:atheoryoftypes} developed
+by the Swedish philosopher and mathematician Per Martin-L\"of, who
+showed that the \emph{Curry-Howard} isomorphism between simple types
+and propositional logic naturally extends to an isomorphism between
+dependent types and higher-order constructive logic.  Exploiting this
+equivalence between logical propositions and types, dependent types
+have been used as the basis for proof assistants --- the most advanced
+system developed in Europe, Coq \cite{coq}, has been used to formalize
+Mathematics (e.g.\ the proof of the four colour theorem
+\cite{gonthier:four-colour-paper}) and to verify programs (e.g.\
+correctness of a C compiler~\cite{compcert,compcert-back,compcert-front}).
+
+\subsection*{Dependently Typed Programming}
+
+Currently, the development of high quality software is more an art
+than a science. Types are used to enforce basic sanity conditions but
+their scope is limited and not easily expandable without moving to a
+different language, or a typed domain specific language. Formal
+certification, if done at all, is performed independently of the
+development effort and is often limited in scope by relying on fully
+automatizable methods, while on the other side complete formal
+verification of an existing software system seems currently
+unfeasible. 
+
+% \marginnote{ctm: I worry about that people are too cynical for
+% correctness rhetoric; alternative para with hygiene rhetoric
+% in source comment. }
+% Dependently typed programming languages provide a vehicle to
+% implement high quality software which by design can be formally
+% certified without additional effort.
+% The key idea is to use a type
+% system that can express arbitrary logical properties. At the same time
+% this technology fits seamlessly with conventional programming,
+% promoting a scalable \emph{pay as you go} approach to formal certification of
+% programs. Also, dependent types provide a software
+% engineering method for the development of high quality software; using
+% an expressive dependent type system greatly enhances the support an
+% IDE can provide to the programmer.
+
+%%%%%%%%%%%%%%%%%
+%%%% ctm proposes
+Dependent types provide programmers with language to
+communicate the design of software to computers
+and expose its motivating structure. With a type
+system that doubles as a logic,
+programmers are free to negotiate their place in the spectrum
+of precision from basic memory safety
+to total correctness. This \emph{pay as you go} approach allows
+us to raise hygiene standards in programming and improve guarantees
+(e.g., removing tags and tests on validated data)
+but to stop when requirements become too severe.
+Such expressive types can also contribute to software engineering
+methods and processes through interactive, type-directed development
+environments.
+%%%%%%%%%%%%%%%%%
+
+During the past decade we have progressed considerably towards the
+goal of exploiting dependent types in functional programming.  Augustsson's
+Cayenne~\cite{augustsson:cayenne} showed how functional programmers
+could use dependent types to their advantage by giving static types to
+conventionally untypable programs line \texttt{printf} or
+\texttt{scanf}, or by implementing a tageless interpreter exploiting
+type information to avoid dynamic type checking at runtime. The torch
+was carried further by McBride's implementation of
+Epigram~\cite{conor.james:viewfromleft}, with funding from EPSRC
+(\textit{Epigram: Innovative Programming with Inductive Families} -
+GR/N72259), introducing both an implementation of Wadler's views
+\cite{wadler:views}
+within a dependently typed framework, and an interactive IDE using
+types to guide the implementation process. On the subsequent EPSRC
+project (\textit{Observational Equality For Dependently Typed
+  Programming} - EP/C512022/1), Thorsten Altenkirch and Conor McBride
+made significant progress on one of the thorniest technical problems
+for dependently typed programming---how to represent equality \cite{alti:ott-conf}.  More
+recently, Norell implemented Agda~\cite{agdawiki,ulf:thesis}, a more
+scalable implementation of dependently typed programming, strongly
+influenced by Cayenne and Epigram.
+
+Recent developments in functional programming
+languages provide a more conservative approach to dependently typed
+programming, by insisting on a distinction between the language used
+at compile time and at run time. Examples for this development are
+Haskell's recently acquired Generalized Algebraic Datatypes, further
+rationalized in Sheard's
+\(\Omega\)mega~\cite{omega,sheard:curry-howard} and Xi's
+ATS~\cite{ATS-frocos05}. Other similar developments are also taking
+place in the US: Concoqtion~\cite{concoqtion1,concoqtion2}
+uses Coq's
+Type Theory as a compile time language, Stump's system
+Guru~\cite{guru} based on his proposal for Operational Type
+Theory which separates the notions of evaluation for
+proofs and for programs, and Morrisett's proposal for
+Ynot~\cite{ynot,morrisett:ynot}, based on Hoare Type
+Theory~\cite{nanevski:htt} which uses ideas from separation logic to
+encapsulate effects.
+
+\subsection*{Reusability and Dependent Types}
+\label{sec:main-rese-chall}
+
+While dependently typed programming promises to provide many
+opportunities for the future of software engineering and the delivery
+of high quality code, it is not without its own challenges. One
+particularly serious
+issue %ctm -- challenge
+is 
+%ctm -- the reduced
+\emph{reusability} %ctm emphed
+of programs using very expressive types. As an example, consider the
+refinement of lists by vectors: lists were instrumental to the success
+of functional programming starting with LISP in the 1950s. Hence an
+effective list library is at the heart of any serious functional
+programming language. What about vectors? Do we need to rework all our
+list processing functions, making length precise? And what about other
+refinements of lists --- sorted lists, sorted vectors, list of bounded
+length, the list is endless? Were we to follow the conventional
+approach to implementing libraries, we should see an explosion of
+library functions. Indeed, this tendency is already observable in the
+Agda and Coq libraries. It considerably reduces the attraction of
+dependent types for functional programmers.
+
+Moreover, the effect of types on reusability is not a phenomenon
+restricted to dependent types: it already plays a r\^{o}le in the
+discussion about types in functional programming (e.g. Scheme vs.
+Haskell/ML). Types reduce the
+reusability of programs and more precision frequently leads to still less 
+reuse. The more
+conservative approaches to dependent types described above
+(for example GADT implementations, and the $\Omega$mega system) 
+are also acutely affected by this issue.
+
+If we want to exploit the advantages of expressive
+type systems it is essential that we
+address %ctm -- find an answer to
+the problem of
+maintaining or even improving reusability while increasing
+expressivity. %ctm -- expressiveness. 
+The goal of the current proposal is to investigate
+promising approaches based on recent work at Oxford and 
+Nottingham:
+firstly, \textbf{Datatype-generic programming} and its realisation
+within a dependently typed language using universe reflection; 
+secondly, \textbf{Container theory}, a theoretically
+rigorous approach to concrete datatypes including dependent types.
+
+\subsection*{Datatype-Generic Programming}
+\label{sec:datatype-gener-progr}
+
+While functional programming already excels at providing reusable
+software components because it offers high levels of abstraction, 
+functional programmers frequently want to go further: 
+\textbf{Generic programming} is about making programs more flexible by
+allowing them to be \parametris{}ed in `non-standard' ways \cite{backhouse:cpw}~--- `standard'
+forms of \parametris{}ation are just considered ordinary programming
+rather than generic. 
+A whole family of related but different programs can be captured as one \parametris{}ed generic program. %jg
+Ideally, this \parametris{}ation is done in a
+type-safe way, so that inconsistencies between call site and
+definition site are caught automatically, and even statically.
+
+One family of programs that one might want to write are those
+definable systematically for a wide variety of datatypes: programs such as
+pretty-printers, marshallers, map functions, and so on. For each of
+these applications, rather than writing similar implementations over
+and over again for each new datatype, it would be desirable to write
+one generic program \parametris{}ed by the datatype.  To distinguish
+this specific variety of generic programming from other varieties, we
+coined the term \textbf{datatype-generic programming}
+\cite{Gibbons2003:Patterns} in an earlier project.  There are two
+approaches to achieving this: the Algebra of Programming approach
+\cite{bird97algebra}, in the form of \parametris{}ation by a type
+functor, and the %ctm -- approaches like
+Generic Haskell approach \cite{Hinze&Jeuring2003:Generic},
+by %ctm -- structural
+induction over the structure (e.g., %ctm -- such as
+sums of products) of a type.
+
+Our earlier work on the \textit{Datatype-Generic Programming} project
+explored embeddings of the Generic Haskell approach into more
+conventional languages such as Haskell
+\cite{Oliveira&Gibbons2005:TypeCase} and Scala
+\cite{Oliveira*2008:Visitor}. It turns out that these embeddings
+rely %jg -- depend
+on a form of lightweight dependently typed programming, which
+we have called \emph{indexed programming}; the follow-on
+\textit{Generic and Indexed Programming} project is investigating the
+two-way connections between genericity and indexing.
+
+
+\subsection*{Generic Programming with Dependent Types}
+\label{sec:gener-progr-with}
+
+% \marginnote{ctm: Credit Martin-L\"of for
+% universes? Meanwhile, a PolyP universe with inductive $El$ appears
+% in the $\partial$ rejectum (2001). Never mind.}
+Epigram's type system is powerful enough to be able to emulate (or
+\emph{eat}) existing type systems by adapting Per Martin-L\"of's
+concept of a type-theoretic \textbf{universe}.
+In 2002,
+pre-dating the implementation of Epigram,
+Altenkirch and McBride showed
+how to
+internalize a large fragment of
+Haskell's type system, supporting generic programming
+\emph{\`a la} Generic Haskell in a dependently typed
+setting~\cite{alti:wcgp02}.
+A key 
+component of the approach was the
+definition of a small universe,
+capturing a type $U$ of `codes for types'
+and a `decoder' $El$ equipping each code $t$ in $U$
+with the type
+$El\;t$ of its elements.
+See our
+lecture notes \cite{txa:ssgp06} for a recent introduction to
+universes in Epigram.
+
+One of the main contributions of Peter Morris's PhD~\cite{morris:PhD}
+is to implement universes within Epigram as inductive families, and
+use them for generic programming, e.g. to implement a generic version
+of Huet's `zipper', representing contexts in data via the derivative
+operator \cite{alti:regular}.  Morris relates the inductively defined
+universes to the notion of a container type and thence shows that
+\emph{Epigram can eat itself}.  Our technology can characterize
+dependent types within Epigram (see also
+\cite{alti:cats07,alti:jcats07}).
+
+\subsection*{Container Theory}
+\label{sec:container-theory}
+
+What are the mathematical structures underlying generic programming?
+This is not just a conceptual question. We are looking for
+future-proof ways to structure generic programming languages and
+libraries. A successful line of attack comes from \textbf{container
+  theory} by Abbott, Altenkirch and Ghani
+\cite{alti:fossacs03,alti:tlca03,alti:jpartial,alti:mpc04,alti:cont-tcs,abbott-phd},
+giving a more foundational analysis of data structures as
+containers specified by a type $S$ of \emph{shapes} and a function
+$P$ assigning to each shape its set of \emph{positions} for data. Using the
+language of category theory, we were able to show that all strictly
+positive datatypes, including nested inductive and coinductive types,
+can be expressed in a category corresponding to Extensional Type
+Theory with a rather modest infrastructure.
+%ctm suggests cutting the following technical detail
+% using only core Type Theory
+%(finite types, $\Pi$-, $\Sigma$- and equality types) and $W$-types to
+%represent well-founded trees.
+
+This theoretical analysis has important
+practical consequences: it opens the door to the implementation of a
+type-theory based proof assistant with a small trusted core, an
+essential ingredient for distributed, proof-based security
+architectures.  Moreover, using containers we were able to provide a
+semantical analysis \cite{alti:tlca03,alti:jpartial} of McBride's
+derivative operator~\cite{conor:derivative}.  Containers also yield
+a fresh perspective on polymorphic functions, deriving from our
+completeness result. This is being exploited in work by Prince
+and others \cite{Rawle} on proof automation.
+
+\section{Programme and Methodology}
+
+The goal of our project is to find new ways to identify and exploit
+new solutions to the expressibility-vs-reusability tradeoff for dependently
+typed programming as described above. We will use the existing
+implementations of Epigram and Agda for initial experiments, but plan
+to go further and in particular exploit the reflective capabilities of
+the recently completed Epigram 2 core language to support reusability
+via reflection. 
+
+We seek to exploit two complementary appraches to reusability:
+\emph{reusability by structure} and \emph{reusability by
+  design}. Datatype-generic programming is a typical example of
+reusability by structure, generic operations are instantiated based on
+the structure of types. Reusability by design means that we derive new
+components from existing ones, as we do in class-based
+programming. However, this approach is also applicable to dependently
+typed programming, e.g. we can derive vectors from lists by decorating
+lists with their length and derive operations on vectors from their
+counterparts on lists.
+
+Both have their
+strengths and
+weaknesses, and we believe that a successful approach will necessarily
+incorporate both aspects. Consequently we will explore both avenues
+(WP1, WP2) within a dependently typed setting. We aim to put software
+engineering on a solid mathematical foundation, hence we are keen to
+develop a high level mathematical model of our approach based on our
+previous work on container types (WP3). Concurrently we will develop
+tools to support reflective programming with dependent types,
+continuing the development of the successful Epigram system
+(WP4). Finally, we will identify and investigate design patterns
+relevant for the development of reusable, dependently typed software
+components (WP5).
+
+
+\subsection*{WP1: Reuse by Structure}
+\label{sec:reuse-structure}
+
+This is the basic idea of datatype-generic programming: we can define
+generic operations by recursion over the structure of the
+datatype. E.g., an important construction is Huet's
+zipper~\cite{huet:zipper} which induces a suite of useful editing
+operations for a functional datatype: we have generalized the zipper
+to all context-free datatypes \cite{alti:regular,txa:ssgp06}.
+
+We have already started to classify universes of datatypes, e.g. there
+are \emph{finite} types, \emph{linear} types (like lists),
+\emph{context-free} types (like trees), and most generally,
+\emph{strictly positive} types.  The further we move up this hierarchy
+of datatypes, the more types are included and the fewer are the
+generic operations -- a natural trade-off. Many refinements of this
+hierarchy are possible; indeed, the addition of inductive families,
+the workhorse of dependently typed programming, adds another dimension
+to this picture. We would like to be able to model sub-universes by
+subtyping, making it possible to move freely along the hierarchy of
+universes, without having to reimplement structures or operations. We
+need a flexible interface that makes it easy for the user to specify
+generic operations but we want to maintain a type-safe approach which
+exactly specifies the domain of applicability of each generic
+operation.
+
+\textbf{Research Challenges:} i) to identify a hierarchy of universes of
+datatypes, taking inductive families and coinductive types into
+account; ii) to model sub-universes by subtyping, providing a flexible
+interface to the universe hierarchy; iii) to develop flexible ways of
+introducing new generic operations together with the most general
+sub-universe.
+
+% \begin{titemize}
+% \item to identify a hierarchy of universes of datatypes, taking
+%   inductive families and coinductive types into account;
+% \item to model sub-universes by subtyping, providing a flexible interface to
+%   the universe hierarchy;
+% \item to develop flexible ways of introducing new generic operations
+%   together with the most general sub-universe.
+% \end{titemize}
+
+We will use existing languages and tools (e.g. Haskell, Epigram and
+Agda) for initial experiments; these will feed into new language and
+tool design (WP4), which can be applied in later stages of the
+project.
+
+% --- actually
+% this construction was a spin-off of our earlier papers
+% \cite{alti:tlca03,alti:jpartial} where we use container types. 
+
+
+\subsection*{WP2 : Reuse by Design}
+\label{sec:reuse-design}
+
+While reuse by structure seems the natural functional programming
+approach to maximise reusability, the success of object-oriented
+(or rather class-oriented) programming 
+tells us that reuse by design
+is an important alternative. Indeed, using dependently typed
+meta-programming, we can realize our own refinement operations,
+appropriate to the functional setting in which we work.
+
+As an example, consider deriving the ubiquitous dependent type of
+vectors, i.e. lists with fixed length, from ordinary, non-dependent
+lists. 
+McBride
+has shown recently \cite{conor:DTP08} that this can be
+implemented
+as a \emph{ornamentation} of the existing datatype of
+lists with length information.
+This provides ample opportunities to reuse operations
+on lists, adding only the relevant explanation of how the operation
+interacts with length, improving on the current practice suggest reimplementing it altogether. 
+
+Other interesting dependent types such
+as sorted lists or sorted vectors can be derived using the same
+pattern. The fact that in our dependently typed world meta-programming
+becomes ordinary programming means that all these operations are
+nothing but ordinary programs.
+
+\textbf{Research challenges:} i) to identify and implement refinement
+patterns, such as ornamentation, discussed above; ii) to
+investigate the interaction between reuse by structure and reuse by
+design; iii) to develop a convenient interface to express refinement
+patterns, expressible within the dependently typed programming
+framework; iv) to investigate to what degree we can model other
+design-based approaches to reusability, such as class- and
+aspect-oriented programming, within our framework.
+
+
+% \begin{titemize}
+% \item to identify and implement refinement patterns, such as the 
+%   decorate
+%   operator discussed above;
+
+% \item to investigate the interaction between reuse by structure and reuse
+%   by design;
+
+% \item to develop a convenient interface to 
+%   express 
+%   refinement patterns,
+%   expressible within the dependently typed programming framework;
+
+% \item to investigate to what degree we can model other design-based
+%   approaches to reusability, such as class- and aspect-oriented
+%   programming, within our framework.
+
+% \end{titemize}
+
+
+\subsection*{WP3: Towards a Theory of Reusability}
+\label{sec:theory}
+
+While the emphasis of the proposed project is on solving practical
+problems, we believe that a good theoretical foundation is beneficial
+and often helps when choosing among several design
+alternatives. Continuing our work on container types, we would like to
+explore how we can model the approaches investigated in WP1 and WP2
+from a categorical perspective. For example, we can interpret the
+hierarchy of universes exposed in WP1 by restrictions on container
+types, e.g. context-free types can be modelled as containers with a
+decidable equality on positions. Similarly, the refinement patterns
+identified in WP2 can be given a categorical semantics based on the
+container approach. The container approach often suggests practically
+useful operators~--- such as a symmetric tensor product of datatypes
+proposed by Peter Hancock \cite{hank:tensor}, which can be used to
+construct regular matrices from lists. The categorical analysis comes
+with its own reasoning principles; for example, we can exploit the
+characterisation of the derivative by a universal property to reason
+about programs using zipper operations.
+
+\textbf{Research challenges:} i) to generalize the container framework
+so that it is applicable to dependent types and abstract datatypes;
+ii) to develop categorical models of reuse by structure and reuse by
+design within the framework of container theory; iii) to use the
+categorical models of generic constructions such as the zipper to
+support reasoning about generic functional programs; iv) to
+investigate the use of containers to implement generic operations, not
+defined by structure but by restriction on containers.
+
+
+% \begin{titemize}
+% \item to generalize the container framework so that
+%   it is applicable to dependent types and abstract datatypes;
+
+% \item to develop categorical models of reuse by structure and reuse by
+%   design within the framework of container theory;
+
+% \item to use the categorical models of generic constructions such as the
+%   zipper to support reasoning about generic functional programs;
+
+% \item to investigate the use of containers to implement generic
+%   operations, not defined by structure but by restriction on
+%   containers.
+% \end{titemize}
+
+
+\subsection*{WP4: Delivery in Programming Languages}
+\label{sec:development-tools}
+
+The Epigram\,2 core language developed
+\cite{morris:ecce,alti:ott-conf} at Nottingham (EPSRC project
+EP/C512022/1) provides sufficient constructs for dependently typed
+meta-programming, reflecting top-level datatypes as codes in a
+universe. There is scope to strengthen this in the light of WP3,
+making container structure foundational. We shall unleash this
+expressive power and provide access to the methodologies developed in
+WP1 and WP2 by designing high level programming constructs which
+\emph{elaborate} in terms of the core, filling in details, such as the
+universe codes for given types, whenever they can be readily
+inferred. We must take care to develop a programming notation which is
+both convenient and computable.
+
+Concurrently, we shall explore how our approach can be expressed in
+other dependently typed languages, primarily Agda (from Chalmers). One
+of Agda's developers, Nils Anders Danielsson now works in the
+Nottingham group, facilitating this task.
+
+\textbf{Research challenges:} i) to support methodologies developed in
+WP1 and WP2 via new high level programming constructs; ii) to develop
+tractable elaboration of these constructs into Epigram\,2's core; iii)
+to investigate whether our approach can be applied to other
+dependently typed environments, such as Agda, Coq's language CIC or
+extensions of Haskell.
+
+
+% \begin{titemize}
+% \item to support methodologies developed in WP1 and WP2 via
+%   new high level programming constructs;
+
+% \item to develop tractable elaboration of these constructs into
+%   Epigram\,2's core;
+
+% \item to investigate whether our approach can be applied to other
+%   dependently typed environments, such as Agda, Coq's language CIC or
+%   extensions of Haskell.
+% \end{titemize}
+
+\subsection*{WP5: Development patterns}
+\label{sec:development-patterns}
+
+There is a growing collection of dependently typed programs developed
+in CIC, Agda and Epigram but also using more conventional languages
+such as Haskell with GADTS, $\Omega$mega, and even C\#~\cite{kennedy:csharp}--- examples include
+finger trees (CIC),
+a tagless interpreter and type checker (Epigram),
+an execution model for multicore processors (Agda),
+and a type-safe compiler (Epigram).
+We have classified these and similar
+examples into six categories: size, shape, state, unit, type and proof
+\cite{Gibbons*2007:Generic}.
+We would like to revisit and expand this catalogue of examples, and see to what
+extent the development can be factorized using standard components,
+either following the structural or design based approaches. 
+
+\textbf{Research challenges:} i) to identify and document development
+patterns relevant in dependently typed programming; ii) to implement
+reusable components such as a generalized library for lists or linear
+types; iii) to investigate the potential of container types and other
+approaches to structure libraries.
+
+
+% \begin{titemize}
+% \item to identify and document development patterns relevant in
+%   dependently typed programming;
+
+% \item to implement reusable components such as a generalized library for
+%   lists or linear types;
+
+% \item to investigate the potential of container types and other
+%   approaches to structure libraries.
+% \end{titemize}
+
+\subsection*{PhD project at Oxford}
+\label{sec:phd-project-at}
+
+The Oxford doctoral student will work primarily on WP2 and
+WP5. Specifically, the student's thesis will address issues of
+reusability by design in dependently-typed programming, through
+refinement of invariants on dependently-typed data structures. This
+work will involve theoretical issues (modelling of invariants and of
+their composition and application), language design issues (convenient
+expression of these models), and pragmatic issues (case studies
+exploring patterns of refinement). A possible thesis title might be
+\textit{Refinement of Data Structures in Dependently-Typed
+  Programming}.
+
+\subsection*{PhD project at Strathclyde}
+\label{sec:phd-project-at-1}
+
+The Strathclyde doctoral student will work primarily on WPs 1,3 and 4.
+The goal is to refound datatypes on container
+theory and exploit their structure in dependently typed
+programming: a possible title is \textit{Computing with
+  Containers}. The student will tackle questions such as: If induction
+is `dependent fold', what is `dependent map'?  Morris's thesis
+suggests one possibility~\cite{morris:PhD}. How much of the equational
+theory can be automated in the typechecker? Our recent work offers an
+approach~\cite{alti:ott-conf}. Can we exploit the uniformity of
+operations \emph{parametric} in element type?
+
+%This topic has a clear starting point but an open end.
+%  It stands
+% independently of the rest of the proposal, although it may reduce
+% labour in the main effort, especially WP3.
+
+\section{Coordination}
+\label{sec:coordination}
+
+The recent move of Ghani and McBride from Nottingham to Strathclyde
+has expanded the geographic extent of this project from two sites to
+three, but it has given us the opportunity to forge a closer
+association with the thriving programming languages community in
+central Scotland; in particular, there has always been a strong group
+in dependent types at Edinburgh. To keep the project on track we plan
+three intensive meetings a year (miniworkshops) which rotate between
+the sites. We will invite some of our external collaborators and ask
+them to provide feedback on the progress of the project. Additionally,
+we have included six individual visits between sites each year lasting
+from a few days to two weeks. Visits are very effective for focussed
+work on one of the project's topics. The coordination will be
+supported by a web infrastructure (including wiki and blog) which
+allows interaction between participants and creates at the same time a
+record of the project's progress.
+
+\section{Relevance to Beneficiaries}
+
+The primary beneficiaries of our research are developers and users of
+dependently typed programming languages world wide. Clearly, there is
+a need for consolidation and standardisation in this area and, we hope
+to contribute to this by targeting more than one system. In the long
+run, we hope that the software engineering community in and outwith
+academia will benefit from the results of our research; initial
+steps towards this goal have been made in form of tutorials on generic
+and indexed programming at some of the major
+OO conferences: 
+OOPSLA \cite{Gibbons2005:DesignOOPSLA},
+ECOOP \cite{Gibbons2005:DesignECOOP}, 
+and ACCU \cite{Gibbons2008:indexedACCU}.
+
+
+\section{Dissemination and Exploitation}
+
+{\looseness=-1
+Apart from using the conventional means to disseminate results
+---~presentations at meetings and publications in conference
+proceedings and journals~--- our research pages are highly visible in
+the Programming Languages community: postings on Nottingham's
+\textit{FP lunch} blog~\cite{fplunchweb} frequently make it to the
+front page of the well known \textit{Lambda the
+  Ultimate}~\cite{lambda-the-ultimate} website and gets high ratings
+on \emph{reddit}. The highly popular regular seminar series \emph{Fun
+  in the Afternoon} was co-founded by two of the investigators, and
+provides a good vehicle to disseminate and discuss research ideas. We
+make our tools, including the sources and documentation, available on
+the web (for example, \cite{epigram2}), and support users exploiting
+our research as well as we can.  We have had considerable success in
+organizing workshops and summer schools for disseminating the results
+of previous projects
+\cite{Backhouse*2002:Algebraic,Backhouse&Gibbons2003:Summer,Backhouse*2007:Datatype},
+and the project \emph{Generic and Indexed Programming} (GIP) is planning to
+hold another summer school in 2010; we propose to continue this
+tradition, with a workshop colocated
+with the GIP school, and a final summer school at the end of the project.
+\par}
+
+{\small 
+\bibliographystyle{abbrv} \let\LIST\list \def\list#1#2{\LIST{#1}{#2 \squash}}
+\bibliography{case} 
+}
+\end{document}
