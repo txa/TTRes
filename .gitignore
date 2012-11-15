@@ -5,3 +5,4 @@
 *.agdai
 *.gz
 _region_.*
+.DS_store
