@@ -50,18 +50,8 @@
 \newcommand{\includesop}[2]{{#2}\in {#1}}
 
  
-%\title{Separation Logics for High-Level Languages with\\ Code Pointers\\ {\small Case for Support}}
-%\title{Local and Modular Reasoning  about  Code as First Class Type\\ \emph{---~Case
- % for Support~---}}
-%\title{Reasoning about Stored Commands:\\ From Function Pointers to Self-modifying Programs
-%\\ \emph{---~Case  for Support~---}}
-  
-  \title{Type Theory with hidden monotonic Resources\\ \emph{---~Case
+\title{Presheaf Type Theory for  monotone Resources\\ \emph{---~Case
   for Support~---}}
-
-
- %\title{Verifying Programs with Function Pointers and Self-modifying Features\\ \emph{---~Case
-  %for Support~---}}
  
 
 \author{Thorsten Altenkirch \qquad Bernhard Reus\\
@@ -87,8 +77,8 @@ Categorical Methods and Quantum Computing and he has published over 50
 papers in this areas which are frequently cited (h-index $\geq$
 24). He has been Principal Investigator on four EPSRC projects,
 including \textit{Observational Equality For Dependently Typed
-  Programming} (EPSRC grant EP/C512022/1, \pounds 242,198), and
-\emph{Reusability and Dependent Types} (EP/G034109/1, \pounds 244,671)
+  Programming} (EPSRC grant EP/C512022/1, $\pounds$242,198), and
+\emph{Reusability and Dependent Types} (EP/G034109/1, $\pounds$244,671)
 and co-investigator on two more.  He has participated in a number of
 EU projects, in particular in the Coordination Action TYPES and its
 predecessors. He organized the annual TYPES meeting in 2007 and
@@ -112,37 +102,36 @@ be successfully exploited to structure type-theoretic developments.
 
 
 \subsection*{Bernhard Reus} 
-Dr Bernhard Reus is a Senior Lecturer in Computer Science at the University of Sussex with special interest in program semantics and  logics. Reus received a distinction (``summa-cum-laude'') for his  PhD in Computer Science from the Ludwig-Maximilians-Universit\"at in Munich in 1996, got a Lectureship at Sussex University in 2000 and was promoted to Senior Lecturer in 2006. He is a member of the Foundations of Software Systems group in the Department of Informatics at Sussex. His recent research contributions have been in the area of program verification and semantics for  programming languages and logics, in particular languages with stored procedures. 
+Bernhard Reus is a Senior Lecturer in Computer Science at the University of Sussex with special interest in program semantics and  logics.  He is a member of the Foundations of Software Systems group in the Department of Informatics at Sussex with currently  6 members of faculty, 2 postdocs and 6 PhD students. His recent research contributions have been in the area of program verification and semantics for  programming languages and logics, in particular languages with stored procedures. 
 He led a small team to build a verification tool for C-like programs that supports (semi-)automatic reasoning about stored procedures (function pointers). In co-operation with colleagues in Saarbr\"ucken, Copenhagen, Oxford and Paris he developed new models for the elegant reasoning about recursive predicates indexed by recursively defined worlds. The models developed are presheaf-models with extra structure which is relevant to the proposed project.
   
-Reus has been working in the area of  \emph{Applied Semantics}  for most of his research career. He co-authored a frequently cited new denotational  semantics for the call-by-name  $\lambda$-calculus with control operators and a derivation of an interpreter for this functional language  (Krivine's machine)   \cite{RS7} and was involved in the development of
-  a  structural operational semantics of multi-threaded Java  \cite{R2} and  a  OCL like Hoare-logic for a sequential Java-like language \cite{R12}.
- 
-    He has also made contributions to foundations, in particular domain theory and type theory.
- One of the main results of the PI was the \emph{logical} development of  \emph{Synthetic Domain Theory}  which is a variation of Domain Theory, suggested by Dana Scott, in which  domains can be treated    simply as sets. % and functions are automatically continuous.
-His distinguished  PhD thesis  \cite{R3}  laid out the formal development of  a flavour of Synthetic Domain Theory in a type-theoretical setting based on   few axioms only. Reus  verified  all theorems  \cite{R5}  using  the  proof-checker \emph{Lego} which implements a specific type theory (ECC). \emph{Lego} was  somehow a precursor of the  popular  type theoretical systems \emph{Coq} and \emph{Agda} that will be used in the proposed project.  
-In order to ensure  the consistency of this formalization, a realizability model was defined \cite{R4}.    Later this work has been generalised to allow for more models in \cite{RS8} which in turn  has been generalised further by other researchers.
+ Reus has published aver 40 papers  in international conferences (LICS, POPL, CSL, ESOP, ICALP, FOSSACS, VMCAI) and journals (TCS, MSCS, JFP, LMCS). He co-authored a frequently cited new denotational  semantics for the call-by-name  $\lambda$-calculus with control operators and a derivation of an interpreter for this functional language  (Krivine's machine)   \cite{RS7} and was involved in the development of
+  a  structural operational semantics of multi-threaded Java  \cite{R2} and  a  OCL like Hoare-logic for a sequential Java-like language \cite{R12}. 
+  He has also made contributions to foundations, in particular domain theory and type theory.
+  He has experience in formal semantics, type theory, categorical semantics of type theory, formalisation of proofs in type theoretical systems (Lego, precursor of the Agda system as used in the project). 
+ His work on formalizations of Synthetic Domain Theory   has been generalised to allow for more models in \cite{RS8} which in turn  has been generalised further by other researchers.
 
-The two PIs have  collaborated once before in the area of type theory, developing 
-  an elegant definition of $\lambda$-terms using a generalized form of polymorphism \cite{R15}. 
-  At the time they also  co-organised and co-chaired   the TYPES workshop in  Kloster Irsee near Munich.
-
+Reus  co-chaired and co-organised events  in both areas, notably   the now well established \emph{Domains}   and  \emph{Types}  workshops (in 1997, 2008 and in 1998, respectively). He has been the PC Chair for Domains IX (Sussex, 2008), and on the PC for Domains X (2011), Classical Logic and Computation (Brno, 2010). Reus has supervised two PhD students and externally examined two PhD students.  
 
 \textbf{Grants}
 Reus was the sole PI on the recent EPSRC project     \emph{From Reasoning Principles for Function Pointers To Logics for Self-Configuring Programs}
-      (EP/G003173/1, \pounds 390,871) 
+      (EP/G003173/1,$ \pounds$390,871) 
       which investigated models and program logics for higher-order store, i.e.\  theories and tools that allow one to  prove correctness of programs  that use code pointers.   
-      One application  of the developed semantics is the full  soundness proof of Pottier's \emph{capability types} \cite{R14}.
-       Another outcome is a (semi-)automatic theorem prover, Crowfoot \cite{R3}, that allows one to write C-like programs with stored procedures (function pointers), specify them using pre- and postconditions and automatically prove that the procedures meet the specification using just some annotations.
-   
- Reus was also the sole PI on the EPSRC project \emph{Programming Logics for Denotations  of  Recursive  Objects}  (GR/R65190/01), \pounds 62,360) on program logics for Abadi and Cardelli's  object-calculus. The main results of this project include 
+      One outcome is a (semi-)automatic theorem prover, Crowfoot \cite{R3}, that allows one to write C-like programs with stored procedures (function pointers), specify them using pre- and postconditions and automatically prove that the procedures meet the specification using just some annotations.
+ Reus was also the sole PI on the EPSRC project \emph{Programming Logics for Denotations  of  Recursive  Objects}  (GR/R65190/01), $\pounds$62,360) on program logics for Abadi and Cardelli's  object-calculus. The main results of this project include 
 a correctness proof  of the Abadi-Leino logic \cite{AbadiLeino} using  denotational semantics  \cite{R6,RS10} that can explain the inherent limitations of the Abadi-Leino logic and
 a new  logic for a  simple  imperative while-language where procedures  are first class data that can be stored away and updated at runtime,  but  not dynamically allocated   \cite{RS11}.  
  
  Reus has also obtained numerous  smaller grants from the DAAD, Nuffield Foundation,  EPSRC, and the London Mathematical Society, respectively, that funded   research visits and the organisation of events at Sussex.
   
-\textbf{Usual stuff?   numbers of publications? other stuff?} The PI has published numerous refereed papers and articles in international conferences (LICS, POPL, CSL, ESOP, ICALP, FOSSACS, VMCAI) and journals (TCS, MSCS, JFP, LMCS) of high standing.     He also co-chaired and co-organised events  in both areas, notably   the now well established \emph{Domains}   and  \emph{Types}  workshops (in 1997, 2008 and in 1998, respectively) and co-edited journal volumes (TCS vol 264(2), MSCS vol 20(2))  and  an  LNCS volume (1657) with selected papers, respectively.
-He has been the PC Chair for Domains IX (Sussex, 2008), and on the PC for Domains X (2011), Classical Logic and Computation (Brno, 2010). Reus has supervised two PhD students and externally examined two PhD students.  
+ %
+
+\textbf{Co-operation}
+The two PIs have  collaborated once before in the area of type theory, developing 
+  an elegant definition of $\lambda$-terms using a generalized form of polymorphism \cite{R15}. 
+  At the time they also  co-organised and co-chaired   the TYPES workshop in  Kloster Irsee near Munich.
+
+
 %
   \section*{References}
 
@@ -391,8 +380,8 @@ We should then say which work packages they will contribute for. Project partner
 
 We don't have any industrial partners/visitors. is that a problem?
 
- \subsection*{Research Hypothesis and Objectives}
- While it is clear in principle that any dependently typed program can be given a presheaf semantics and that with this interpretation monotone resources can be given a functional specification, it is not yet clear how to use this idea in practice. What does it mean to interpret a given program or proof  in a presehaf semantics? How can objects in this presheaf workd interact with ordinary objects? And how can we combine different notion of monotone effects which lead to different presehaf interpretations in one program?
+  \subsection*{Research Hypothesis and Objectives}
+ While it is clear in principle that any dependently typed program can be given a presheaf semantics and that with this interpretation monotone resources can be given a functional specification, it is not yet clear how to use this idea in practice. What does it mean to interpret a given program or proof  in a presheaf semantics? How can objects in this presheaf world interact with ordinary objects? And how can we combine different notion of monotone effects which lead to different presheaf interpretations in one program?
 
  \emph{Set out the research idea or hypothesis.
 Explain why the proposed project is of sufficient timeliness and novelty to warrant consideration for funding.
@@ -408,14 +397,14 @@ develop real world applications relying on monotone resources.
 
 Objectives
 \begin{itemize}
-\item Show that the presehaf semantics of Type Theory can be used to
-  model monotone resources,
+\item Show that the presheaf semantics of Type Theory can be used to
+  model monotone resources.
 \item Define a syntactic extension of Type Theory which makes it
-  possble to interpret type theoretic programs wrt to different presheaves,
-\item Implement this extension as an extension to the Agda system,
-\item Study different applications of presheaf type theory to
+  possible to interpret type theoretic programs wrt.\ to different presheaves.
+\item Implement this  as an extension to the Agda system.
+\item Study different applications of ``presheaf type theory'' to
   monotone resources and show their usability.
-\item Investigate other applications of presheaf type theory.
+\item Investigate other applications of ``presheaf type theory.''
 \end{itemize}
 
 
@@ -425,7 +414,7 @@ Objectives
 Describe the programme of work, indicating the research to be undertaken and the milestones that can be used to measure its progress. The detail should be sufficient to indicate the programme of work for each member of the research team. Explain how the project will be managed.}
 
 We will be using dependently typed programming not just as the
-objectve but also as the vehicle carrying out the research. That is we
+objective but also as the vehicle carrying out the research. That is we
 will develop our programs and theorems using the Agda system.
 We will be using local state as our guiding example and first study 
 how to use presheaf semantics to program and reason about this
@@ -446,23 +435,25 @@ syntax.
  
 
 We detail the work packages. Before we need to point out that we use the local state monad as guiding example, that we use presheaf semantics as we know it can deal with such monotone resource already. 
-\spacing{0.85}
- \bibliographystyle{alpha}
+
  
+ \newpage
  
-\newpage
-\section*{Work Plan}
+ \section*{Work Plan}
 one page, they like GANTT or PERT charts.
 
+All work packages are do be formally developed in/with Agda (``theory'' and tool support)
+
  \begin{enumerate}
- \item Define Presheaf semantics for core Type Theory
- \item Model the monotone resources in the above
- \item Agda implementation
- \item Examples using local state
+ \item Define a presheaf semantics for core Type Theory.
+ \item Model the monotone resources in the above.
+ \item Examples using local state (see HTT, queues).
  \item Develop generic interface for Type Theory with monotone resources by reflection of semantics 
- \item Investigate combination of various resources and resource models
- \item More examples using other monotone resources.
- \item Investigate other application of presheaf type theory
+ \item Investigate combination of various resources and resource models.
+ \item More examples using other monotone resources (thread, transaction based memory (STM)).
+ \item Investigate other application of presheaf type theory like HOAS.
+ \item Establish reasoning principles for monotone resources (Separation/Hoare Logic, see HTT)
+ \item Effective tool support for using the above reasoning principles.
  \end{enumerate}
  
 \subsection*{Task list}
