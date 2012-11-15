@@ -57,7 +57,15 @@
 }
 \end{center}
 }
-
+\newcommand{\todo}[1]{
+\begin{center}
+\fbox{
+\begin{minipage}{4.5in}
+{\bf ToDo:} {\rm #1}
+\end{minipage}
+}
+\end{center}
+}
 
 
  \newcommand{\br}[1]{
@@ -127,33 +135,33 @@ be successfully exploited to structure type-theoretic developments.
 Bernhard Reus is a Senior Lecturer in Computer Science at the University of Sussex with special interest in program semantics and  logics.  He is a member of the Foundations of Software Systems group in the Department of Informatics at Sussex with currently  6 members of faculty, 2 postdocs and 6 PhD students. His recent research contributions have been in the area of program verification and semantics for  programming languages and logics, in particular languages with stored procedures. 
 He led a small team to build a verification tool for C-like programs that supports (semi-)automatic reasoning about stored procedures (function pointers). In co-operation with colleagues in Saarbr\"ucken, Copenhagen, Oxford and Paris he developed new models for the elegant reasoning about recursive predicates indexed by recursively defined worlds. The models developed are presheaf-models with extra structure which is relevant to the proposed project.
   
- Reus has published aver 40 papers  in international conferences (LICS, POPL, CSL, ESOP, ICALP, FOSSACS, VMCAI) and journals (TCS, MSCS, JFP, LMCS). He co-authored a frequently cited new denotational  semantics for the call-by-name  $\lambda$-calculus with control operators and a derivation of an interpreter for this functional language  (Krivine's machine)   \cite{RS7} and was involved in the development of
+ Reus has published over 50 papers  in international conferences (LICS, POPL, CSL, ESOP, ICALP, FOSSACS, VMCAI) and journals (TCS, MSCS, JFP, LMCS). He co-authored a frequently cited new denotational  semantics for the call-by-name  $\lambda$-calculus with control operators and a derivation of an interpreter for this functional language  (Krivine's machine)   \cite{RS7} and was involved in the development of
   a  structural operational semantics of multi-threaded Java  \cite{R2} and  a  OCL like Hoare-logic for a sequential Java-like language \cite{R12}. 
-  He has also made contributions to foundations, in particular domain theory and type theory.
-  He has experience in formal semantics, type theory, categorical semantics of type theory, formalisation of proofs in type theoretical systems (Lego, precursor of the Agda system as used in the project). 
+    He has experience in formal semantics, domain theory, type theory and its categorical semantics, formalisation of proofs in type theoretical systems (Lego, precursor of the Agda system as used in the project). 
  His work on formalizations of Synthetic Domain Theory   has been generalised to allow for more models in \cite{RS8} which in turn  has been generalised further by other researchers.
 
-Reus  co-chaired and co-organised events  in both areas, notably   the now well established \emph{Domains}   and  \emph{Types}  workshops (in 1997, 2008 and in 1998, respectively). He has been the PC Chair for Domains IX (Sussex, 2008), and on the PC for Domains X (2011), Classical Logic and Computation (Brno, 2010). Reus has supervised two PhD students and externally examined two PhD students.  
+Reus  co-chaired and co-organised events  in both areas, notably   the now well established \emph{Domains}   and  \emph{Types}  workshops (in 1997, 2008 and in 1998, respectively). He has been the PC Chair for Domains IX (Sussex, 2008), and served on the PC for Domains X (2011) and Classical Logic and Computation (Brno, 2010). 
+%Reus has supervised two PhD students and externally examined two PhD students.  
 
 \textbf{Grants}
 Reus was the sole PI on the recent EPSRC project     \emph{From Reasoning Principles for Function Pointers To Logics for Self-Configuring Programs}
-      (EP/G003173/1,$ \pounds$390,871) 
+      (EP/G003173/1, $\pounds$390,871) 
       which investigated models and program logics for higher-order store, i.e.\  theories and tools that allow one to  prove correctness of programs  that use code pointers.   
       One outcome is a (semi-)automatic theorem prover, Crowfoot \cite{R3}, that allows one to write C-like programs with stored procedures (function pointers), specify them using pre- and postconditions and automatically prove that the procedures meet the specification using just some annotations.
  Reus was also the sole PI on the EPSRC project \emph{Programming Logics for Denotations  of  Recursive  Objects}  (GR/R65190/01), $\pounds$62,360) on program logics for Abadi and Cardelli's  object-calculus. The main results of this project include 
 a correctness proof  of the Abadi-Leino logic \cite{AbadiLeino} using  denotational semantics  \cite{R6,RS10} that can explain the inherent limitations of the Abadi-Leino logic and
 a new  logic for a  simple  imperative while-language where procedures  are first class data that can be stored away and updated at runtime,  but  not dynamically allocated   \cite{RS11}.  
- 
- Reus has also obtained numerous  smaller grants from the DAAD, Nuffield Foundation,  EPSRC, and the London Mathematical Society, respectively, that funded   research visits and the organisation of events at Sussex.
+ He  also obtained numerous  smaller grants from the DAAD, Nuffield Foundation,  EPSRC, and the London Mathematical Society, respectively, that funded   research visits and the organisation of events at Sussex.
   
  %
 
-\textbf{Co-operation}
+\subsection*{Track record of co-operation between the investigators}
 The two PIs have  collaborated once before in the area of type theory, developing 
-  an elegant definition of $\lambda$-terms using a generalized form of polymorphism \cite{R15}. 
+  an elegant definition of $\lambda$-terms using a generalized form of polymorphism and the CSL paper\cite{R15} has a citation found of 102 (on Google Scholar).
   At the time they also  co-organised and co-chaired   the TYPES workshop in  Kloster Irsee near Munich.
 
-
+\subsection*{The host institutions}
+\todo{what do we write here?}
  \newpage
  
 \section*{Proposed Research}
@@ -165,26 +173,26 @@ Dependently typed programming languages like Agda exploit a powerful type system
 
 
 \subsection*{Introduction and Overview}
-
-\br{integrate and eliminate}
- Functional programming is  referentially transparent as side effects are prohibited or strictly controlled by a type system.  Modern  languages like Haskell,  Python, F\# and  object-oriented variants like OCaml and Scala  have massively contributed to the popularity of functional programming (citations needed). These languages are frequently used outside academia  (citation/examples needed, need some real life data).  (Patterns of functional Map-reduce???).
- 
- One main feature of these languages is their strong type system which allows the programmer to  discover certain errors at compile time. If   the type system is rich enough such that it comprises dependent types, i.e. types that depend on program expressions, it can be used to encode program  properties (propositions-as-types). This gives rise to what is called \emph{Type theory}: a functional language  with a   type system strong enough  to express  (second-order) predicate logic. As a consequence, the verification of program properties can be done by the type checker which undoubtedly is of  huge benefit to program developers. Of course the programs will now also contain proof terms that the programmer, now also a verifier, needs to provide.
-  
- Alas, functional programming is not sufficient for all applications. The so-called ``\emph{Awkward squad}'' (citation) is needed in reality, ie input/output, state, references, exceptions, concurrent threads. 
-These are examples of  (impure) side effects, in functional programming modelled via monads (see Moggi/Wadler). 
-
- Our primary objective is to have a dependent type theory that ``includes''  such side effects (in a controlled way).
- We restrict to side effects caused by monotone resources like heap without deallocation or threads with possibility to  spawn new threads but not kill any threads.
- 
- The major research question underlying this proposal is:
- \textbf{How can side effects on monotone resources be modelled inside type theory?}  
-  There are two approaches to fix this problem:
- \begin{itemize}
- \item use Hoare Type  theory (references needed) where  effects and operations are \emph{added} to the type theory and \emph{axioms are postulated} all of which  need external justification. A Hoare triple type then is added that expresses the behaviour of the operations with effects. In this approach one does not build side effects into the type theory, one adds them  (disadvantages?)
- \item implement  effects and provide functional specifications for programs with effects along the lines of  Wouter Swierstra's work (citation). Here the effect is simulated using concrete data types.
-However, in this approach  dependency on resources needs to be modelled explicitly. Moreover, type theory is total and so some ``smart constructors" (citation) are needed to encode everything nicely. The encodings are tedious and   not re-usable. Swierstra says: \emph{"Furthermore, the automatic weakening of references requires a decidable equality on our universe. This excludes references storing dependent types, such as dependent pairs or dependent functions. It would be interesting to investigate how to remove this restriction and better support the automatic weakening of functions that are polymorphic with respect to the shape of the heap, such as the inc function above."} (citation from his diss).
- \end{itemize}
+%
+%\br{integrate and eliminate}
+% Functional programming is  referentially transparent as side effects are prohibited or strictly controlled by a type system.  Modern  languages like Haskell,  Python, F\# and  object-oriented variants like OCaml and Scala  have massively contributed to the popularity of functional programming (citations needed). These languages are frequently used outside academia  (citation/examples needed, need some real life data).  (Patterns of functional Map-reduce???).
+% 
+% One main feature of these languages is their strong type system which allows the programmer to  discover certain errors at compile time. If   the type system is rich enough such that it comprises dependent types, i.e. types that depend on program expressions, it can be used to encode program  properties (propositions-as-types). This gives rise to what is called \emph{Type theory}: a functional language  with a   type system strong enough  to express  (second-order) predicate logic. As a consequence, the verification of program properties can be done by the type checker which undoubtedly is of  huge benefit to program developers. Of course the programs will now also contain proof terms that the programmer, now also a verifier, needs to provide.
+%  
+% Alas, functional programming is not sufficient for all applications. The so-called ``\emph{Awkward squad}'' (citation) is needed in reality, ie input/output, state, references, exceptions, concurrent threads. 
+%These are examples of  (impure) side effects, in functional programming modelled via monads (see Moggi/Wadler). 
+%
+% Our primary objective is to have a dependent type theory that ``includes''  such side effects (in a controlled way).
+% We restrict to side effects caused by monotone resources like heap without deallocation or threads with possibility to  spawn new threads but not kill any threads.
+% 
+% The major research question underlying this proposal is:
+% \textbf{How can side effects on monotone resources be modelled inside type theory?}  
+%  There are two approaches to fix this problem:
+% \begin{itemize}
+% \item use Hoare Type  theory (references needed) where  effects and operations are \emph{added} to the type theory and \emph{axioms are postulated} all of which  need external justification. A Hoare triple type then is added that expresses the behaviour of the operations with effects. In this approach one does not build side effects into the type theory, one adds them  (disadvantages?)
+% \item implement  effects and provide functional specifications for programs with effects along the lines of  Wouter Swierstra's work (citation). Here the effect is simulated using concrete data types.
+%However, in this approach  dependency on resources needs to be modelled explicitly. Moreover, type theory is total and so some ``smart constructors" (citation) are needed to encode everything nicely. The encodings are tedious and   not re-usable. Swierstra says: \emph{"Furthermore, the automatic weakening of references requires a decidable equality on our universe. This excludes references storing dependent types, such as dependent pairs or dependent functions. It would be interesting to investigate how to remove this restriction and better support the automatic weakening of functions that are polymorphic with respect to the shape of the heap, such as the inc function above."} (citation from his diss).
+% \end{itemize}
  
  In this project we are looking to improve on the second approach.  We will try to develop  an elegant \emph{``embedded' solution}, an extension of core type theory with monotonic resources the semantics of which extends conservatively the standard semantics of type theory using an abstract data type that hides the implementation (ie the resource) but provides an interface to access the resource. We propose to do this first, by  means of a representative example, for the local state monad. We  will provide an adequate specification of the local state monad within dependent type theory and a presheaf model for it to ensure soundness.
  This kind of model is particularly apt as 
@@ -236,7 +244,7 @@ crucially on type information to determine what programs mean.
 \subsection*{Dependent Types}
 \label{sec:depend-typed-progr}
 
-\textbf{Dependent types} are types which refer to (hence depend on)
+\emph{Dependent types} are types which refer to  and   depend on
 data. A typical example is the type of vectors: the type
 $\mathrm{Vec}\,A\,n$ represents sequences of elements of type $A$
 that have  length $n$.
@@ -374,15 +382,15 @@ Such presheaf semantics will be used to define the semantics of a dependently ty
  This research concerns the improvement of language support for the production of certified programs and thus fits perfectly in the EPSRC's "Verification and Correctness" theme. The development of languages and tools to support the production of correct software has numerous applications in safety critical systems, medical devices and even operating systems (\emph{refer to Gerwin's verified OS? Msoft's verified device drivers?}).
 The EPSRC has earmarked this area for future growth and currently funds verification related projects to the extent of GBP 14 million. 
 UK academics are world leaders in this field. Larger centres of excellence for DTP in the UK are Nottingham (Altenkirch, grant "Reusability and Dependent Types''), Oxford, and Strathclyde. Both investigators are involved in national and international collaborations with other leaders in DTP and Program Verification (\emph{explain})   
-Further international leaders in the field  are G.~Morrisett (Harvard) and S.~Weirich (UPenn) in the US (see Trellys project), W.~Swierstra (Utrecht, Netherlands), T.~Streicher (Darmstadt) and M.~Hofmann (LMU Munich) in Germany and the programming logic research group in Chalmers (Gothenburg, Sweden).
+Further international leaders in the field  are G.~Morrisett (Harvard) and S.~Weirich (UPenn) in the US (see Trellys project), W.~Swierstra (Utrecht, Netherlands), T.~Streicher (Darmstadt) and M.~Hofmann \& A.~Abel (LMU Munich) in Germany, and the programming logic research group in Chalmers (Gothenburg, Sweden).
 
  The success of the proposed research programme will have potential impact not only on the DTP community but also on  the design of functional programming languages with rich type systems  in general. 
  The research outcomes are expected to enable programmers to enjoy the advantages of functional programming and effectful programming at the same time without losing the ability to prove programs correct.
- Long term it is expected that such languages will become more popular and  more widely used in software engineering (world wide), potentially  reducing the economic loss caused by malfunctioning software (estimated around 150\$ in the US alone by by David Rice 2009, source: html).
+ Long term it is expected that such languages will become more popular and  more widely used in software engineering (world wide), potentially  reducing the economic loss caused by malfunctioning software (estimated around \$ 150 in the US alone by by David Rice 2009, source: html).
  %http://news.cnet.com/8301-13846_3-9978812-62.html).
  
  \subsection*{Academic Impact}
- \txa{ToDo}
+ \txa{Fill in and explain.}
  
 \emph{ Describe how the research will benefit other researchers in the field and in related disciplines, both within the UK and elsewhere.}
 
@@ -393,17 +401,16 @@ Explain any collaboration with other researchers and their role in the project.}
 
 \emph{ For each Visiting Researcher, set out why they are the most appropriate person, and what they will contribute to the project.}
 
-visiting researchers?  Who shall we nominate?
-
+\todo{visiting researchers?  Who shall we nominate?
 Wouter Swierstra
 Greg Morrissett
 Thomas Streicher 
- Jeremy Gibbons
+ Jeremy Gibbons?
+}
+\todo{
+We should then say which work packages they will contribute for. Project partners should send letter of support }
 
-We should then say which work packages they will contribute for. Project partners should send letter of support as far as I understand.
-
-We don't have any industrial partners/visitors. is that a problem?
-
+ 
   \subsection*{Research Hypothesis and Objectives}
  While it is clear in principle that any dependently typed program can be given a presheaf semantics and that with this interpretation monotone resources can be given a functional specification, it is not yet clear how to use this idea in practice. What does it mean to interpret a given program or proof  in a presheaf semantics? How can objects in this presheaf world interact with ordinary objects? And how can we combine different notion of monotone effects which lead to different presheaf interpretations in one program?
 
@@ -476,7 +483,7 @@ We detail the work packages. Before we need to point out that we use the local s
  
 \subsection*{References}
 
-\txa{add}
+\txa{add and include bib file from previous DTP project}
 \br{add}
 
 
@@ -501,13 +508,16 @@ All work packages are do be formally developed in/with Agda (``theory'' and tool
 \br{chartification, match with milestones}
 \br{overview who does what}
 \newpage
-\section{Justification of Resources}
 
-up to 2 pages
+
+\section*{Justification of Resources}
+
+\todo{still to be completed}
+
 \subsection{Directly Incurred Costs}
 \paragraph*{Staff} 
 
- We request two Research Assistants (scale 6 or 7(?)) to help with ? \textbf{need to make twos fit with the workplan.}
+ We request two Research Assistants (scale 6 or 7(?)) to help with ? \todo{need to make twos fit with the workplan.}
  Ideally, the first RA would have some experience in one or several of the following: (dependent) type theory, effect systems, category theory, sheaf semantics.  The second RA would ideally have a good grasp of functional  programming, ideally with Agda and or Coq and good knowledge about side effects and/or category theory. 
  
  
@@ -528,18 +538,17 @@ The two RAs will require a PC. The University of Nottingham and Sussex, resp., d
  \subsection{Directly Allocated Costs}
  Investigators will work about 7 to 8 hours a week?
 
-?
-
+ 
 
 
 
 \subsection{Exceptions}
-  
+  ??
  
  \newpage
  
- \section{Pathways to Impact}
- up to 2 pages
+ \section*{Pathways to Impact}
+\todo{still do be done. Any ideas? Activities will include a workshop, making agra code and extension available via a project webpage, other ideas?}
  
  \emph{Use this annex to the proposal to describe activities that can be undertaken during the project to accelerate the route to the identified benefits being realised; shortening the time between discovery and use of knowledge. Also identify the additional resources needed to undertake these activities. }
  
