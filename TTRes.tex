@@ -153,7 +153,7 @@ up to 6 pages
 \subsection*{Summary}
 \label{sec:summary}
 
-Dependently typed programming languages like Agda exploit a powerful type system to integrate programming and reasoning allowing us to freely move between prototypical programs and certifed deliverables. Dependently typed programming (DTP) is becoming increasingly popular and is being used for real world software like web servers and communication protocols (\emph{citation}). This raises an important issue: how to integrate effectful programming and dependent types in a way that supports the engineering of certified programs effectively? In particular we want to be able to program and reason about monotone resources like memory or threads. We are going to investigate how to use a semantic construction from category theory (preheaf models) to support the ubiquitous monotone resources building on previous work by  by Swierstra and Altenkirch (\emph{citation}) on functional specification of effects.
+Dependently typed programming languages like Agda exploit a powerful type system to integrate programming and reasoning allowing us to freely move between prototypical programs and certifed deliverables. Dependently typed programming (DTP) is becoming increasingly popular and is being used for real world software like web servers and communication protocols (\emph{citation}). This raises an important issue: how to integrate effectful programming and dependent types in a way that supports the engineering of certified programs effectively? In particular we want to be able to program and reason about monotone resources like memory or threads. We are going to investigate how to use a semantic construction from category theory (presheaf models) to support the ubiquitous monotone resources building on previous work by  by Swierstra and Altenkirch (\emph{citation}) on functional specification of effects.
 
 
 \subsection*{Introduction and Overview}
@@ -186,9 +186,159 @@ In a dependent type they with monotone resources  reasoning about functional pro
  
  \subsection*{Background}
  
- Presheaves,
- Type theory,  local state model, examples for resource usage?
- 
+\subsection*{Functional Programming}
+\label{sec:funct-progr}
+
+The \textbf{Functional Programming} paradigm~\cite{backus:fp} presents
+computation as the evaluation of mathematical \emph{expressions} built
+by the application of functions, rather than the execution of
+\emph{commands} which change the state of a machine. Functional
+languages thus abstract away from operational details, allowing
+programs to exhibit much more clearly their conceptual
+structure. Modern functional languages like Haskell~\cite{haskell} and
+OCaml~\cite{ocaml} possess very powerful mechanisms for abstraction
+and re-use, facilitating brevity, clarity, reliability and
+productivity. At the same time, they possess production-quality
+compilers, most notably the Glasgow Haskell Compiler (GHC) and the
+Objective Caml system, with substantial libraries capable of
+sustaining a growing programmer base in practical application
+development. As computer systems become more complex and distributed,
+functional programming's 
+clarity and hygiene become ever more significant virtues, one of the
+reasons why the designers of mainstream languages such as Java, C\#{}
+and Visual Basic are increasingly adopting ideas from the functional
+world, e.g. polymorphism to support the safe reuse of parametric
+software components.  
+
+Over the years, the r\^ole of \emph{types} in functional programming has
+become increasingly significant. In the landmark Hindley-Milner system, types
+are fully inferred by machine~\cite{damas.milner:principal} and they in no
+way determine the operational behaviour of programs---the assignment of a
+type merely confirms that a program will not `go wrong' in an especially
+disorderly manner. More recently, languages like Haskell have supported type
+systems which drop full mechanical type inference, allowing
+explicit types to express more subtle design statements than a machine
+could determine for itself. Moreover, type-directed programming
+approaches \cite{wadler.blott:less.ad.hoc,weirich:type-cast} depend
+crucially on type information to determine what programs mean.
+
+\subsection*{Dependent Types}
+\label{sec:depend-typed-progr}
+
+\textbf{Dependent types} are types which refer to (hence depend on)
+data. A typical example is the type of vectors: we write
+$\mathrm{Vec}\,A\,n$ for the type of length $n$ sequences of type $A$
+items. Vectors refine the ubiquitous types of lists $[A]$.
+Conventionally, a program $\mathrm{idM}$ computing the identity
+matrix, represented as a sequence of sequences of real numbers, of a
+given finite dimension would have the type $\mathrm{idM} : \Bbb{N} \to
+[[\Bbb{R}]]$. In a dependently typed language the same program could
+be given the more informative type $\mathrm{idM} : (n:\Bbb{N}) \to
+\mathrm{Vec}\,(\mathrm{Vec}\,\Bbb{R}\,n)\,n$, clearly indicating the
+relationship between the value of the input and the structure of the
+output; and documenting the fact that $\mathrm{idM}$ always returns
+square matrices.
+
+Dependent types have their origin in the constructive
+foundations of mathematics \cite{martinloef:atheoryoftypes} developed
+by the Swedish philosopher and mathematician Per Martin-L\"of, who
+showed that the \emph{Curry-Howard} isomorphism between simple types
+and propositional logic naturally extends to an isomorphism between
+dependent types and higher-order constructive logic.  Exploiting this
+equivalence between logical propositions and types, dependent types
+have been used as the basis for proof assistants --- the most advanced
+system developed in Europe, Coq \cite{coq}, has been used to formalize
+Mathematics (e.g.\ the proof of the four colour theorem
+\cite{gonthier:four-colour-paper}) and to verify programs (e.g.\
+correctness of a C compiler~\cite{compcert,compcert-back,compcert-front}).
+
+\subsection*{Dependently Typed Programming}
+
+Currently, the development of high quality software is more an art
+than a science. Types are used to enforce basic sanity conditions but
+their scope is limited and not easily expandable without moving to a
+different language, or a typed domain specific language. Formal
+certification, if done at all, is performed independently of the
+development effort and is often limited in scope by relying on fully
+automatizable methods, while on the other side complete formal
+verification of an existing software system seems currently
+unfeasible. 
+
+Dependent types provide programmers with language to
+communicate the design of software to computers
+and expose its motivating structure. With a type
+system that doubles as a logic,
+programmers are free to negotiate their place in the spectrum
+of precision from basic memory safety
+to total correctness. This \emph{pay as you go} approach allows
+us to raise hygiene standards in programming and improve guarantees
+(e.g., removing tags and tests on validated data)
+but to stop when requirements become too severe.
+Such expressive types can also contribute to software engineering
+methods and processes through interactive, type-directed development
+environments.
+
+During the past decade we have progressed considerably towards the
+goal of exploiting dependent types in functional programming.  Augustsson's
+Cayenne~\cite{augustsson:cayenne} showed how functional programmers
+could use dependent types to their advantage by giving static types to
+conventionally untypable programs line \texttt{printf} or
+\texttt{scanf}, or by implementing a tageless interpreter exploiting
+type information to avoid dynamic type checking at runtime. The torch
+was carried further by McBride's implementation of
+Epigram~\cite{conor.james:viewfromleft}, with funding from EPSRC
+(\textit{Epigram: Innovative Programming with Inductive Families} -
+GR/N72259), introducing both an implementation of Wadler's views
+\cite{wadler:views}
+within a dependently typed framework, and an interactive IDE using
+types to guide the implementation process. On the subsequent EPSRC
+project (\textit{Observational Equality For Dependently Typed
+  Programming} - EP/C512022/1), Thorsten Altenkirch and Conor McBride
+made significant progress on one of the thorniest technical problems
+for dependently typed programming---how to represent equality \cite{alti:ott-conf}.  More
+recently, Norell implemented Agda~\cite{agdawiki,ulf:thesis}, a more
+scalable implementation of dependently typed programming, strongly
+influenced by Cayenne and Epigram.
+
+Recent developments in functional programming
+languages provide a more conservative approach to dependently typed
+programming, by insisting on a distinction between the language used
+at compile time and at run time. Examples for this development are
+Haskell's recently acquired Generalized Algebraic Datatypes, further
+rationalized in Sheard's
+\(\Omega\)mega~\cite{omega,sheard:curry-howard} and Xi's
+ATS~\cite{ATS-frocos05}. Other similar developments are also taking
+place in the US: Concoqtion~\cite{concoqtion1,concoqtion2}
+uses Coq's
+Type Theory as a compile time language, Stump's system
+Guru~\cite{guru} based on his proposal for Operational Type
+Theory which separates the notions of evaluation for
+proofs and for programs, and Morrisett's proposal for
+Ynot~\cite{ynot,morrisett:ynot}, based on Hoare Type
+Theory~\cite{nanevski:htt} which uses ideas from separation logic to
+encapsulate effects.
+
+\subsection*{Dependent types and effects}
+\label{sec:depend-types-effects}
+
+Functional programming languages like Haskell can now deal very well with the so-called ``\emph{Awkward squad}'' (citation) is needed in reality, ie input/output, state, references, exceptions, concurrent threads. Indeed one can argue that pure functional programming is better suited to integrate new notions of effects such as the transactional memory model because it doesn't have a built-in notion of effect as conventional imperative langauges do.
+
+However, when moving to dependent types where programs may appear in types it is not obvious how to extend Haskell's monadic approach to IO. Haskell's IO monad is opaque - it has no compile time behaviour.  Indeed, we don't want effects to be executed at compile time. 
+
+Hoare Type Theory (references needed)  bypasses this issue by adding types and operations and by postulating axioms. The notion of a monad is extended to include 
+Hoare triples so that the behaviour of operations can be specified. The HTT approach fits very naturally in the Coq approach to type-theoretic program development where program and proofs are separated. Using HTT already an impressive suit of examples of verified effectful programs has been verified using the HTT approach. 
+
+The HTT approach fits less well with DTP, where programs and proofs are not explicitely separated but tightly integrated. Postulates are generally rejected in this context because they lead to programs which do not compute. Altenkirch and Wouter have developed an alternative: \emph{functional specification of effects}. Here the compile time semantic of effects is given by a functional program, e.g. state is modelled using the pruely functional state monad at compile time but is executed using real memory cells at run-time. This way it is possible to reason about stateful programs and run them. The beauty of this approach is that it doesn't require any extensions to Type Theory and it also comes with its own soundness proof. Sure, we still need to ensure that our compile-time speicfication agrees with the actual run-time behaviour but this issue arises in any approach. 
+
+The Swierstra-Altenkirch approach hits a serious obstacle when ddealing with ubiquitous monotone resources. By monotone resources we mean resources which can be explicitely alloacted but never need to be deallocated - this is usually doen by a garbage collector. In Haskell monotone resources can be dealt with easily becuase we know that resources can only be generated by the appriate allocation operation. However, we cannot model this fact in Type Theory because it relies on a closed world asssumption. Swierstra addressed this problem by introducing an explicitly modelling dependency on resources. Moreover, type theory is total and so some ``smart constructors" (citation) are needed to encode everything nicely. The encodings are tedious and   not re-usable. Swierstra says: \emph{"Furthermore, the automatic weakening of references requires a decidable equality on our universe. This excludes references storing dependent types, such as dependent pairs or dependent functions. It would be interesting to investigate how to remove this restriction and better support the automatic weakening of functions that are polymorphic with respect to the shape of the heap, such as the inc function above."} (citation from his diss).
+
+\subsection*{Presheaf models of Type Theory}
+\label{sec:presheaf-models-type}
+
+In the past functional programming has benefitted by importing concepts from Category Theory, the ubiquitous use of monads is the only most famous example for this phenomen. The present issue - how to deal effectively with monotone resources in dependently typed programming - is yeat another example. Indeed we know how to deal with monotine resources in denotational semantics from the work of Levy and Plotkin/Power (citation): we model local state using a possible world semantics (or more technical a presheaf semantics) where the worlds correspond to the current allocation of resources. The monotonicity of resources correspods to the functoriality: and value in a given world is still valid in any extension which corresponds to additional resources which have been allocated in the mean-time. 
+
+Whileit is clear in principle that any dependently typed program can be given a presheaf semantics and that with this interpretation monotone resources can be given a functional specification, it is not yet clear how to use this idea in practice. What does it mean to interpret a given program or proof  in a presehaf semantics? How can objects in this presheaf workd interact with ordinary objects? And how can we combine different notion of monotone effects which lead to different presehaf interpretations in one program?
+
  \subsection*{National Importance}
  \emph{Include a National Importance section within this document to justify why this proposal warrants support by the UK taxpayer. Describe how the potential benefits align with national priorities, how the research relates to EPSRCÕs research areas and strategies, and how it complements other research activity in the field. It is anticipated that this section should not require more than one or two paragraphs for most proposals.}
 

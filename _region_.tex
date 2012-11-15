@@ -1,0 +1,96 @@
+\message{ !name(TTRes.tex)}\documentclass[twocolumn,a4paper,11pt,ari]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{alltt}
+\usepackage{stmaryrd}
+%\usepackage{a4wide}
+\usepackage{times}
+\usepackage{setspace}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm]{geometry}
+%\usepackage{fancyheadings}
+ 
+%\usepackage[PostScript=dvips]{diagrams}
+%\input epsf
+%\input{prooftree}
+%\renewcommand{\printlandscape}{\special{landscape}}
+\usepackage{pstricks,pst-node,pst-text,pst-tree,pst-3d}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{pst-grad}
+\usepackage{pst-xkey}
+\usepackage{multido}
+
+
+\include{grantinc}
+
+\newcommand{\HLine}{\rule{\textwidth}{1pt}}
+\newcommand{\Head}[1]{{\bf #1}\vspace{-2ex}\\\HLine}
+\newcommand{\HeadC}[1]
+  {{\begin{center}{\bf #1}\end{center}}\vspace{-2ex}\HLine}
+\newcommand{\HeadB}[1]{\Head{\Blue{#1}}}
+\newcommand{\Nn}{\mathbb{N}}
+
+
+ \newcommand{\sem}[1]{[\![{#1} ]\!]}
+ \newcommand{\imp}{\Rightarrow}
+\newcommand{\subn}[1]{\langle\mathtt{new}_{\mathit{C}}/{#1}\rangle}
+\newcommand{\triple}[3]{\{{#1}\}\ {#2}\ \{{#3}\}}
+\newcommand{\bt}{\ensuremath{\cal B}}
+\newcommand{\ct}{\ensuremath{\cal C}}
+\newcommand{\defval}{\text{def}}
+\newcommand{\variable}[1]{{\frenchspacing\ensuremath{\textit{#1}}}}
+\newcommand{\syntax}[1]{\texttt{\def\{{\char123}\def\}{\char125}#1}}
+\newcommand{\structrule}[2]{\dfrac{\strut#1}{\strut#2}}
+\newcommand{\partialto}{\rightharpoonup}
+\newcommand{\pll}{\mathrel{|}}
+\newcommand{\trueval}{\mathit{true}}
+\newcommand{\falseval}{\mathit{false}}
+\newcommand{\nullval}{\mathit{null}}
+\newcommand{\selectop}[3]{\{ {#1}\in {#2}\ |\ {#3}\}}
+\newcommand{\setopsop}[3]{{#2} \, {#1}\, {#3}}
+\newcommand{\forallop}[3]{\forall {#2}\in {#1}.\, {#3}}
+\newcommand{\includesop}[2]{{#2}\in {#1}}
+
+ 
+%\title{Separation Logics for High-Level Languages with\\ Code Pointers\\ {\small Case for Support}}
+%\title{Local and Modular Reasoning  about  Code as First Class Type\\ \emph{---~Case
+ % for Support~---}}
+%\title{Reasoning about Stored Commands:\\ From Function Pointers to Self-modifying Programs
+%\\ \emph{---~Case  for Support~---}}
+  
+  \title{Type Theory with hidden monotonic Resources\\ \emph{---~Case
+  for Support~---}}
+
+
+ %\title{Verifying Programs with Function Pointers and Self-modifying Features\\ \emph{---~Case
+  %for Support~---}}
+ 
+
+\author{Thorsten Altenkirch \qquad Bernhard Reus\\
+University of Nottingham\qquad University of Sussex}
+
+\date{}
+
+\begin{document}
+
+\message{ !name(TTRes.tex) !offset(-3) }
+
+\spacing{.87}
+\maketitle
+
+
+\message{ !name(TTRes.tex) !offset(257) }
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+ 
