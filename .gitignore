@@ -2,3 +2,5 @@
 *.pdf
 *.dvi
 *.log
+*.agdai
+*.gz
