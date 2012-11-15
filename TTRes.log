@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=latex 2011.7.13)  15 NOV 2012 11:27
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=latex 2011.7.13)  15 NOV 2012 12:40
 entering extended mode
  restricted \write18 enabled.
  Source specials enabled.
@@ -477,113 +477,115 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10.95> not available
 LaTeX Warning: Citation `backus:fp' on page 4 undefined on input line 193.
 
 
-LaTeX Warning: Citation `haskell' on page 4 undefined on input line 199.
+LaTeX Warning: Citation `haskell' on page 4 undefined on input line 200.
 
 
-LaTeX Warning: Citation `ocaml' on page 4 undefined on input line 200.
+LaTeX Warning: Citation `ocaml' on page 4 undefined on input line 201.
 
 
 LaTeX Warning: Citation `damas.milner:principal' on page 4 undefined on input l
-ine 216.
+ine 217.
 
 
 LaTeX Warning: Citation `wadler.blott:less.ad.hoc' on page 4 undefined on input
- line 223.
+ line 224.
 
 
 LaTeX Warning: Citation `weirich:type-cast' on page 4 undefined on input line 2
-23.
+24.
 
 
 Package amsfonts Warning: Obsolete command \Bbb; \mathbb should be used instead
- on input line 235.
+ on input line 237.
 
 
 LaTeX Warning: Citation `martinloef:atheoryoftypes' on page 4 undefined on inpu
-t line 244.
+t line 246.
 
 
-LaTeX Warning: Citation `coq' on page 4 undefined on input line 251.
+LaTeX Warning: Citation `coq' on page 4 undefined on input line 253.
 
 
 LaTeX Warning: Citation `gonthier:four-colour-paper' on page 4 undefined on inp
-ut line 253.
+ut line 255.
 
 
-LaTeX Warning: Citation `compcert' on page 4 undefined on input line 254.
+LaTeX Warning: Citation `compcert' on page 4 undefined on input line 256.
 
 
-LaTeX Warning: Citation `compcert-back' on page 4 undefined on input line 254.
+LaTeX Warning: Citation `compcert-back' on page 4 undefined on input line 256.
 
 
-LaTeX Warning: Citation `compcert-front' on page 4 undefined on input line 254.
+LaTeX Warning: Citation `compcert-front' on page 4 undefined on input line 256.
 
 
 [4]
+Missing character: There is no Ž in font phvr7t!
+
 
 LaTeX Warning: Citation `augustsson:cayenne' on page 5 undefined on input line 
-284.
+297.
 
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 286.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 299.
 
 (/usr/local/texlive/2010/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 
 LaTeX Warning: Citation `conor.james:viewfromleft' on page 5 undefined on input
- line 290.
+ line 303.
 
 
-LaTeX Warning: Citation `wadler:views' on page 5 undefined on input line 293.
+LaTeX Warning: Citation `wadler:views' on page 5 undefined on input line 306.
 
 
-LaTeX Warning: Citation `alti:ott-conf' on page 5 undefined on input line 299.
+LaTeX Warning: Citation `alti:ott-conf' on page 5 undefined on input line 312.
 
 
-LaTeX Warning: Citation `agdawiki' on page 5 undefined on input line 300.
+LaTeX Warning: Citation `agdawiki' on page 5 undefined on input line 313.
 
 
-LaTeX Warning: Citation `ulf:thesis' on page 5 undefined on input line 300.
+LaTeX Warning: Citation `ulf:thesis' on page 5 undefined on input line 313.
 
 
-LaTeX Warning: Citation `omega' on page 5 undefined on input line 310.
+LaTeX Warning: Citation `omega' on page 5 undefined on input line 323.
 
 
 LaTeX Warning: Citation `sheard:curry-howard' on page 5 undefined on input line
- 310.
+ 323.
 
 
-LaTeX Warning: Citation `ATS-frocos05' on page 5 undefined on input line 311.
+LaTeX Warning: Citation `ATS-frocos05' on page 5 undefined on input line 324.
 
 
-LaTeX Warning: Citation `concoqtion1' on page 5 undefined on input line 312.
+LaTeX Warning: Citation `concoqtion1' on page 5 undefined on input line 325.
 
 
-LaTeX Warning: Citation `concoqtion2' on page 5 undefined on input line 312.
+LaTeX Warning: Citation `concoqtion2' on page 5 undefined on input line 325.
 
 
-LaTeX Warning: Citation `guru' on page 5 undefined on input line 315.
+LaTeX Warning: Citation `guru' on page 5 undefined on input line 328.
 
 
-LaTeX Warning: Citation `ynot' on page 5 undefined on input line 318.
+LaTeX Warning: Citation `ynot' on page 5 undefined on input line 331.
 
 
-LaTeX Warning: Citation `morrisett:ynot' on page 5 undefined on input line 318.
+LaTeX Warning: Citation `morrisett:ynot' on page 5 undefined on input line 331.
 
 
 
-LaTeX Warning: Citation `nanevski:htt' on page 5 undefined on input line 319.
+LaTeX Warning: Citation `nanevski:htt' on page 5 undefined on input line 332.
 
-[5] [6] [7] [8] [9]
+[5] [6] [7] [8] [9] [10]
 Missing character: There is no Õ in font phvro7t!
- [10] (./TTRes.aux)
+ [11] (./TTRes.aux)
 
 LaTeX Warning: There were undefined references.
 
  )
 (\end occurred inside a group at level 2)
 
-### semi simple group (level 2) entered at line 397 (\begingroup)
+### semi simple group (level 2) entered at line 449 (\begingroup)
 ### semi simple group (level 1) entered at line 76 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
@@ -593,6 +595,6 @@ Here is how much of TeX's memory you used:
  8409 multiletter control sequences out of 15000+200000
  17635 words of font info for 55 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 32i,6n,52p,1270b,247s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,6n,52p,948b,247s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on TTRes.dvi (10 pages, 46548 bytes).
+Output written on TTRes.dvi (11 pages, 49436 bytes).
